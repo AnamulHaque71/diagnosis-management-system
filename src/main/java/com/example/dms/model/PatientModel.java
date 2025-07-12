@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "patients")
 public class PatientModel {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "patient_id", unique = true)

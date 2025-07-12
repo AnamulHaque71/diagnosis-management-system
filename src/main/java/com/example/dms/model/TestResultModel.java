@@ -19,15 +19,15 @@ public class TestResultModel {
     private String testResultId;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id", referencedColumnName = "patient_id")
+    @JoinColumn(name = "patient_id")
     private PatientModel patient;
 
     @ManyToOne
-    @JoinColumn(name = "doctor_id", referencedColumnName = "doctor_Id")
+    @JoinColumn(name = "doctor_id")
     private DoctorModel doctor;
 
     @ManyToOne
-    @JoinColumn(name = "labAssist_id", referencedColumnName = "lab_assistant_id")
+    @JoinColumn(name = "labAssist_id")
     private LabAssistantModel labAssistant;
 
     private String result;

@@ -26,7 +26,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentModel> findAll() {
+    public List<AppointmentModel> findAllAppointments() {
         return appointmentRepository.findAll();
     }
 
@@ -38,13 +38,15 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public void saveAppointment(AppointmentModel appointmentModel) {
+        Date currentDate = new Date();
+        appointmentModel.setCreatedAt(currentDate.toString());
         appointmentRepository.save(appointmentModel);
     }
 
     @Override
     public String generateAppointmentId() {
         long count = appointmentRepository.count(); // e.g., 3 doctors
-        return "dr-" + (count + 1);
+        return "ap-" + (count + 1);
     }
 
     @Override

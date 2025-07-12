@@ -9,20 +9,23 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Appointments")
+@Table(name = "appointments")
 public class AppointmentModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "doctor_id", nullable = false)
-    private DoctorModel doctor;
 
-    private String string;
-    private String date;
+    @Column(name = "doctor_id")
+    private String doctorId;
 
-    @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
-    private PatientModel patient;
+    private String status;
+    private String createdAt;
+
+    @Column(name = "appointment_date")
+    private String appointmentDate;
+
+    @Column(name = "patient_id")
+    private String patientId;
+
 }

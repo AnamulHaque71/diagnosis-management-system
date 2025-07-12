@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/images/favicon.ico">
+
+    <title th:text="${title}">Dashboard</title>
+
+    <!-- Vendors Style-->
+    <link rel="stylesheet" th:href="@{/css/vendors_css.css}">
+
+    <!-- Style-->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/skin_color.css}">
+
+</head>
+
+<body class="hold-transition light-skin sidebar-mini theme-success fixed">
+
+<!--    <div id="loader" ></div>-->
+    <div th:replace="fragments/top-left :: topLeft"></div>
+    <p> ghfc</p>
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div class="container-full">
+            <!-- Main content -->
+            <section class="content">
+<!--                <div th:replace="doctor/doctor-add :: content"></div>-->
+                <div th:replace="__${content}__"></div>
+
+            </section>
+        </div>
+    </div>
+
+
+
+<!-- Vendor JS -->
+<script th:src="@{/js/vendors.min.js}"></script>
+<script th:src="@{/js/pages/chat-popup.js}"></script>
+<script th:src="@{/assets/icons/feather-icons/feather.min.js}"></script>
+
+<script th:src="@{/assets/vendor_components/jquery-ui/jquery-ui.min.js}"></script>
+<script th:src="@{/assets/vendor_components/perfect-scrollbar-master/perfect-scrollbar.jquery.min.js}"></script>
+<script th:src="@{/assets/vendor_components/fullcalendar/lib/moment.min.js}"></script>
+<script th:src="@{/assets/vendor_components/fullcalendar/fullcalendar.min.js}"></script>
+
+<!-- Rhythm Admin App -->
+<script th:src="@{/js/template.js}"></script>
+<script th:src="@{/js/pages/appointments.js}"></script>
+
+
+</body>
+</html>
