@@ -16,12 +16,12 @@ public class AppointmentServiceImpl implements AppointmentService {
     private AppointmentRepository appointmentRepository;
 
     @Override
-    public List<AppointmentModel> findByPatientId(Long patientId) {
+    public List<AppointmentModel> findByPatientId(String patientId) {
         return appointmentRepository.findByPatientId(patientId);
     }
 
     @Override
-    public List<AppointmentModel> findByDoctorId(Long doctorId) {
+    public List<AppointmentModel> findByDoctorId(String doctorId) {
         return appointmentRepository.findByDoctorId(doctorId);
     }
 

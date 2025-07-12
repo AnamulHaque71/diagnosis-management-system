@@ -4,82 +4,82 @@
     <div class="box-header with-border">
         <h4 class="box-title">Doctor Information Form</h4>
     </div>
-<!--    &lt;!&ndash; /.box-header &ndash;&gt;-->
-<!--    <form class="form" method="post" th:action="@{/doctors/add}" th:object="${doctor}">-->
-<!--        <div class="box-body">-->
-<!--            <h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i> Basic Information</h4>-->
-<!--            <hr class="my-15">-->
+    <!-- /.box-header -->
+    <form class="form" method="post" th:action="@{/doctor/add}" th:object="${doctor}">
+        <div class="box-body">
+            <h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i> Basic Information</h4>
+            <hr class="my-15">
 
 
-<!--            &lt;!&ndash; User Selection &ndash;&gt;-->
-<!--            <div class="form-group">-->
-<!--                <label class="form-label">User Account</label>-->
-<!--                <select class="form-select" th:field="${doctor.user}" required>-->
-<!--                    <option value="">Select User</option>-->
-<!--                    <option th:each="user : ${users}"-->
-<!--                            th:value="${user.id}"-->
-<!--                            th:text="${user.username + ' (' + user.email + ')'}"></option>-->
-<!--                </select>-->
-<!--                <small class="text-danger" th:if="${#fields.hasErrors('user')}" th:errors="${doctor.user_id}"></small>-->
-<!--            </div>-->
+            <!-- User Selection -->
+            <div class="form-group">
+                <label class="form-label">User Account</label>
+                <select class="form-select" th:field="${doctor.user}">
+                    <option value="">Select User</option>
+                    <option th:each="user : ${users}"
+                            th:value="${user.id}"
+                            th:text="${user.username + ' (' + user.email + ')'}"></option>
+                </select>
+                <small class="text-danger" th:if="${#fields.hasErrors('user')}" th:errors="${doctor.user_id}"></small>
+            </div>
 
-<!--            <h4 class="box-title text-info mb-0 mt-20"><i class="ti-briefcase me-15"></i> Professional Information</h4>-->
-<!--            <hr class="my-15">-->
+            <h4 class="box-title text-info mb-0 mt-20"><i class="ti-briefcase me-15"></i> Professional Information</h4>
+            <hr class="my-15">
 
-<!--            <div class="row">-->
-<!--                <div class="col-md-6">-->
-<!--                    &lt;!&ndash; Specialization &ndash;&gt;-->
-<!--                    <div class="form-group">-->
-<!--                        <label class="form-label">Specialization</label>-->
-<!--                        <input type="text" class="form-control" th:field="*{specialization}" placeholder="Enter specialization">-->
-<!--                        <small class="text-danger" th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}"></small>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-6">-->
-<!--                    &lt;!&ndash; Department &ndash;&gt;-->
-<!--                    <div class="form-group">-->
-<!--                        <label class="form-label">Department</label>-->
-<!--                        <input type="text" class="form-control" th:field="*{department}" placeholder="Enter department">-->
-<!--                        <small class="text-danger" th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></small>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Specialization -->
+                    <div class="form-group">
+                        <label class="form-label">Specialization</label>
+                        <input type="text" class="form-control" th:field="*{specialization}" placeholder="Enter specialization">
+                        <small class="text-danger" th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}"></small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- Department -->
+                    <div class="form-group">
+                        <label class="form-label">Department</label>
+                        <input type="text" class="form-control" th:field="*{department}" placeholder="Enter department">
+                        <small class="text-danger" th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></small>
+                    </div>
+                </div>
+            </div>
 
-<!--            <div class="row">-->
-<!--                <div class="col-md-6">-->
-<!--                    &lt;!&ndash; Designation &ndash;&gt;-->
-<!--                    <div class="form-group">-->
-<!--                        <label class="form-label">Designation</label>-->
-<!--                        <input type="text" class="form-control" th:field="*{designation}" placeholder="Enter designation">-->
-<!--                        <small class="text-danger" th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}"></small>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-6">-->
-<!--                    &lt;!&ndash; Experience &ndash;&gt;-->
-<!--                    <div class="form-group">-->
-<!--                        <label class="form-label">Experience (Years)</label>-->
-<!--                        <input type="number" class="form-control" th:field="*{experienceYears}" placeholder="Enter years of experience">-->
-<!--                        <small class="text-danger" th:if="${#fields.hasErrors('experienceYears')}" th:errors="*{experienceYears}"></small>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Designation -->
+                    <div class="form-group">
+                        <label class="form-label">Designation</label>
+                        <input type="text" class="form-control" th:field="*{designation}" placeholder="Enter designation">
+                        <small class="text-danger" th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}"></small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- Experience -->
+                    <div class="form-group">
+                        <label class="form-label">Experience (Years)</label>
+                        <input type="number" class="form-control" th:field="*{experienceYears}" placeholder="Enter years of experience">
+                        <small class="text-danger" th:if="${#fields.hasErrors('experienceYears')}" th:errors="*{experienceYears}"></small>
+                    </div>
+                </div>
+            </div>
 
-<!--            &lt;!&ndash; Degree &ndash;&gt;-->
-<!--            <div class="form-group">-->
-<!--                <label class="form-label">Degree</label>-->
-<!--                <input type="text" class="form-control" th:field="*{degree}" placeholder="Enter degree">-->
-<!--                <small class="text-danger" th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}"></small>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; /.box-body &ndash;&gt;-->
-<!--        <div class="box-footer">-->
-<!--            <button type="button" class="btn btn-warning me-1" onclick="window.history.back()">-->
-<!--                <i class="ti-trash"></i> Cancel-->
-<!--            </button>-->
-<!--            <button type="submit" class="btn btn-primary">-->
-<!--                <i class="ti-save-alt"></i> Save-->
-<!--            </button>-->
-<!--        </div>-->
-<!--    </form>-->
+            <!-- Degree -->
+            <div class="form-group">
+                <label class="form-label">Degree</label>
+                <input type="text" class="form-control" th:field="*{degree}" placeholder="Enter degree">
+                <small class="text-danger" th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}"></small>
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="button" class="btn btn-warning me-1" onclick="window.history.back()">
+                <i class="ti-trash"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">
+                <i class="ti-save-alt"></i> Save
+            </button>
+        </div>
+    </form>
 </div>
 <!-- /.box -->

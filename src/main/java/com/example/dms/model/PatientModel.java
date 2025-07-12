@@ -20,7 +20,6 @@ public class PatientModel {
     private String patientId;
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private UserModel user;
