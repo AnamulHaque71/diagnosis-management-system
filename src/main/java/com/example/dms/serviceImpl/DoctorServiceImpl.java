@@ -16,6 +16,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
 
+
     @Override
     public List<DoctorModelDto> getAllDoctors() {
         List<DoctorModel> doctors = doctorRepository.findAll();

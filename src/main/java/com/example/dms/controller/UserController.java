@@ -92,12 +92,12 @@ public class UserController {
 
 //==========================================================================================================//
 
-
-    @GetMapping("/api/doctor/show")
-    public List<DoctorModelDto> getDoctorPage() {
-        List<DoctorModelDto> doctors = doctorService.getAllDoctors();
-        return doctors;
-    }
+//
+//    @GetMapping("/api/doctor/show")
+//    public List<DoctorModelDto> getDoctorPage() {
+//        List<DoctorModel> doctors = doctorService.getAllDoctors();
+//        return doctors;
+//    }
     @PostMapping("/api/doctor/add")
     public DoctorModel addDoctor(@RequestBody DoctorModelDto doctorDto) {
 

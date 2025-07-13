@@ -1,5 +1,213 @@
 <!-- templates/pages/appointment.html -->
 <div th:fragment="content">
-    <h2>Appointment Adding Page</h2>
-    <p>Form and appointment info goes here...</p>
+    <div class="container-full">
+        <div class="content-header">
+            <div class="d-flex align-items-center">
+                <div class="me-auto">
+                    <h4 class="page-title">Doctor Registration</h4>
+                    <div class="d-inline-block align-items-center">
+                        <nav>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
+                                <li class="breadcrumb-item" aria-current="page">Doctors</li>
+                                <li class="breadcrumb-item active" aria-current="page">Registration</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h4 class="box-title">Doctor Registration Form</h4>
+                        </div>
+                        <form class="form">
+                            <div class="box-body">
+                                <h4 class="section-title"><i class="fas fa-user"></i> Personal Information</h4>
+                                <hr class="my-15">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label required">Full Name</label>
+                                            <input type="text" class="form-control" placeholder="Enter full name" name="fullName">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label required">Username</label>
+                                            <input type="text" class="form-control" placeholder="Enter username" name="username">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label required">Password</label>
+                                            <input type="password" class="form-control" placeholder="Enter password" name="password">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label required">Confirm Password</label>
+                                            <input type="password" class="form-control" placeholder="Confirm password">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label required">Email</label>
+                                            <input type="email" class="form-control" placeholder="Enter email" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label required">Phone</label>
+                                            <input type="tel" class="form-control" placeholder="Enter phone number" name="phone">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label required">Gender</label>
+                                            <select class="form-control" name="gender">
+                                                <option value="">Select Gender</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label required">Date of Birth</label>
+                                            <input type="date" class="form-control" name="dob">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label required">Blood Group</label>
+                                            <select class="form-control" name="bloodGroup">
+                                                <option value="">Select Blood Group</option>
+                                                <option value="A+">A+</option>
+                                                <option value="A-">A-</option>
+                                                <option value="B+">B+</option>
+                                                <option value="B-">B-</option>
+                                                <option value="AB+">AB+</option>
+                                                <option value="AB-">AB-</option>
+                                                <option value="O+">O+</option>
+                                                <option value="O-">O-</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Profile Image</label>
+                                            <input type="file" class="form-control" name="image">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Address</label>
+                                    <textarea class="form-control" rows="3" placeholder="Enter full address" name="address"></textarea>
+                                </div>
+
+                                <h4 class="section-title"><i class="fas fa-stethoscope"></i> Professional Information</h4>
+                                <hr class="my-15">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label required">Specialization</label>
+                                            <input type="text" class="form-control" placeholder="Enter specialization" name="specialization">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label required">Department</label>
+                                            <select class="form-control" name="department">
+                                                <option value="">Select Department</option>
+                                                <option value="Cardiology">Cardiology</option>
+                                                <option value="Neurology">Neurology</option>
+                                                <option value="Orthopedics">Orthopedics</option>
+                                                <option value="Pediatrics">Pediatrics</option>
+                                                <option value="Ophthalmology">Ophthalmology</option>
+                                                <option value="Dermatology">Dermatology</option>
+                                                <option value="ENT">ENT</option>
+                                                <option value="General Surgery">General Surgery</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label required">Designation</label>
+                                            <select class="form-control" name="designation">
+                                                <option value="">Select Designation</option>
+                                                <option value="Intern">Intern</option>
+                                                <option value="Resident">Resident</option>
+                                                <option value="Registrar">Registrar</option>
+                                                <option value="Specialist">Specialist</option>
+                                                <option value="Consultant">Consultant</option>
+                                                <option value="Professor">Professor</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label required">Experience (Years)</label>
+                                            <input type="number" class="form-control" placeholder="Enter years of experience" name="experienceYears" min="0" max="50">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label required">Degree</label>
+                                    <input type="text" class="form-control" placeholder="Enter medical degree" name="degree">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Additional Qualifications</label>
+                                    <textarea class="form-control" rows="3" placeholder="Enter any additional qualifications" name="qualifications"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="terms" required>
+                                        <label class="form-check-label" for="terms">
+                                            I agree to the terms and conditions and confirm that all information provided is accurate.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box-footer">
+                                <button type="reset" class="btn btn-warning">
+                                    <i class="fas fa-trash me-2"></i> Clear Form
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-2"></i> Register Doctor
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </div>
