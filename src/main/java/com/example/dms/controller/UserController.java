@@ -50,10 +50,10 @@ public class UserController {
 //============================================================================================================//
 
 
-    @GetMapping("/api/patient/show")
-    public List<PatientModel> getPatientPage(){
-        return patientService.getAllPatient();
-    }
+//    @GetMapping("/api/patient/show")
+//    public List<PatientModel> getPatientPage(){
+//        return patientService.getAllPatient();
+//    }
     @PostMapping("/api/patient/add")
     public PatientModel getPatientPage(@RequestBody PatientModelDto patientModelDto){
         UserModel user = new UserModel();

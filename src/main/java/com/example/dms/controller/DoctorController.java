@@ -33,10 +33,10 @@ public class DoctorController {
 
     @GetMapping("/doctor/show")
     public String showDoctor(Model model) {
-        model.addAttribute("title", "Show Doctor - DMS");
+        model.addAttribute("title", "Show Docto");
         model.addAttribute("content", "doctor/doctors-list :: content");
-        List<DoctorModelDto> doctor = doctorService.getAllDoctors();
-        model.addAttribute("doctors", doctor);
+        List<DoctorModelDto> doctors = doctorService.getAllDoctors();
+        model.addAttribute("doctors", doctors);
         return "layout";
 
     }
@@ -87,6 +87,6 @@ public class DoctorController {
         doctor.setDoctorId(doctorService.generateDoctorId());
         doctorService.saveDoctor(doctor);
 
-        return "redirect:/doctor/add";
+        return "redirect:/doctor/show";
     }
 }

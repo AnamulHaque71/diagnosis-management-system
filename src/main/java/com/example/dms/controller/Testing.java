@@ -20,4 +20,11 @@ public class Testing {
         return "layout";
     }
 
+    @GetMapping("/patient/view")
+    public String showAppointments(Model model) {
+        model.addAttribute("title", "Appointments");
+        model.addAttribute("content", "patient/patient-view :: content");  // **This must be valid**
+        return "layout";
+    }
+
 }

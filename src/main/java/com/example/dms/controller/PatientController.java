@@ -1,0 +1,82 @@
+package com.example.dms.controller;
+
+import com.example.dms.model.PatientModel;
+import com.example.dms.model.UserModel;
+import com.example.dms.modelDto.DoctorModelDto;
+import com.example.dms.modelDto.PatientModelDto;
+import com.example.dms.repository.PatientRepository;
+import com.example.dms.service.PatientService;
+import com.example.dms.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.Date;
+import java.util.List;
+
+@Controller
+public class PatientController {
+    @Autowired
+    private PatientService patientService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private PatientRepository patientRepository;
+
+    @GetMapping("/patient/show")
+    public String showPatient(Model model) {
+        model.addAttribute("title", "Show Patient");
+        model.addAttribute("content", "patient/patients-list :: content");
+        List<PatientModelDto> patients = patientService.getAllPatient();
+        model.addAttribute("patients", patients);
+        return "layout";
+    }
+    @GetMapping("/patient/add")
+    public String getPatientPage(Model model) {
+        model.addAttribute("title", "Add Patient");
+        model.addAttribute("content", "patient/patient-add :: content");
+        PatientModelDto patient = new PatientModelDto();
+        model.addAttribute("patient", patient);
+        return "layout";
+    }
+
+    @PostMapping("/patient/add")
+    public String addPatient(@ModelAttribute("patient") PatientModelDto patientModelDto){
+        UserModel user = new UserModel();
+
+        user.setUsername(patientModelDto.getUsername());
+        user.setPassword(patientModelDto.getPassword());
+        user.setFullName(patientModelDto.getFullName());
+        user.setFullName(patientModelDto.getFullName());
+        user.setRole("Patient");
+        user.setEmail(patientModelDto.getEmail());
+        user.setPhone(patientModelDto.getPhone());
+        user.setAddress(patientModelDto.getAddress());
+        user.setGender(patientModelDto.getGender());
+        user.setDob(patientModelDto.getDob());
+        user.setBloodGroup(patientModelDto.getBloodGroup());
+        user.setImage(patientModelDto.getImage());
+        user.setCreatedAt(patientModelDto.getCreatedAt());
+        user.setVerified(patientModelDto.isVerified());
+
+        Date currentDate = new Date();
+        user.setCreatedAt(currentDate.toString());
+
+
+        UserModel savedUser = userService.saveUser(user);
+
+        PatientModel patient = new PatientModel();
+        patient.setUser(savedUser);
+
+        patient.setPatientId(patientService.generatePatientId());
+
+        patientRepository.save(patient);
+
+        return "redirect:/patient/show";
+
+    }
+}

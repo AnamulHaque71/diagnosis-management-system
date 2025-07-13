@@ -196,7 +196,8 @@
                     </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="patients.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Patients</a></li>
+                                <li><a th:href="@{/patient/show}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Patient List</a></li>
+                                <li><a th:href="@{/patient/show}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Patient Add</a></li>
                                 <li><a href="patient_details.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Patient Details</a></li>
                             </ul>
                         </li>
@@ -209,8 +210,8 @@
                     </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="doctor_list.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Doctor's List</a></li>
-                                <li><a href="doctor_list.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Doctor Add</a></li>
+                                <li><a th:href="@{/doctor/show}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Doctor's List</a></li>
+                                <li><a th:href="@{/doctor/add}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Doctor Add</a></li>
                                 <li><a href="doctors.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Doctor Details</a></li>
                             </ul>
                         </li>

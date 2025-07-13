@@ -23,6 +23,8 @@ public class DoctorServiceImpl implements DoctorService {
         List<DoctorModelDto> doctorDtoList = new ArrayList<>();
         for (DoctorModel doctor : doctors) {
             DoctorModelDto doctorDto = new DoctorModelDto();
+            doctorDto.setId(doctor.getId());
+            doctorDto.setDoctorId(doctor.getDoctorId());
             doctorDto.setUsername(doctor.getUser().getUsername());
             doctorDto.setPassword(doctor.getUser().getPassword());
             doctorDto.setRole(doctor.getUser().getRole());

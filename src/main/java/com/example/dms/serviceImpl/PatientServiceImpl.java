@@ -1,11 +1,14 @@
 package com.example.dms.serviceImpl;
 
 import com.example.dms.model.PatientModel;
+import com.example.dms.modelDto.PatientModelDto;
 import com.example.dms.repository.PatientRepository;
 import com.example.dms.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -15,9 +18,32 @@ public class PatientServiceImpl implements PatientService {
      private PatientRepository patientRepository;
 
      @Override
-     public List<PatientModel> getAllPatient() {
-         List<PatientModel> patients =  patientRepository.findAll();
-            return patientRepository.findAll();
+     public List<PatientModelDto> getAllPatient() {
+         List<PatientModelDto> patientModelDtoList = new ArrayList<>();
+         List<PatientModel> patientModel = patientRepository.findAll();
+
+         for(PatientModel patient : patientModel) {
+             PatientModelDto patientModelDto = new PatientModelDto();
+             patientModelDto.setId(patient.getId());
+             patientModelDto.setPatientId(patient.getPatientId());
+             patientModelDto.setUsername(patient.getUser().getUsername());
+             patientModelDto.setPassword(patient.getUser().getPassword());
+             patientModelDto.setFullName(patient.getUser().getFullName());
+             patientModelDto.setEmail(patient.getUser().getEmail());
+             patientModelDto.setPhone(patient.getUser().getPhone());
+             patientModelDto.setAddress(patient.getUser().getAddress());
+             patientModelDto.setGender(patient.getUser().getGender());
+             patientModelDto.setDob(patient.getUser().getDob());
+             patientModelDto.setBloodGroup(patient.getUser().getBloodGroup());
+             patientModelDto.setImage(patient.getUser().getImage());
+
+             Date currentDate = new Date();
+             patientModelDto.setCreatedAt(currentDate.toString());
+
+             patientModelDtoList.add(patientModelDto);
+         }
+
+         return patientModelDtoList;
      }
 
      @Override
