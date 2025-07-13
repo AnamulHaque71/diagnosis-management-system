@@ -9,13 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class DoctorController {
@@ -89,4 +86,22 @@ public class DoctorController {
 
         return "redirect:/doctor/show";
     }
+    @GetMapping("/doctors/by-department")
+    @ResponseBody
+    public List<Map<String, String>> getDoctorsByDepartment(@RequestParam String department) {
+        List<DoctorModelDto> filtered = doctorService.getAllDoctors().stream()
+                .filter(d -> d.getDepartment().equalsIgnoreCase(department))
+                .toList();
+
+        List<Map<String, String>> result = new ArrayList<>();
+        for (DoctorModelDto doctor : filtered) {
+            Map<String, String> map = new HashMap<>();
+            map.put("doctorId", doctor.getDoctorId());
+            map.put("fullName", doctor.getFullName());
+            result.add(map);
+        }
+        return result;
+    }
+
+
 }

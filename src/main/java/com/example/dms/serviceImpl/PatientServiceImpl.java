@@ -46,7 +46,12 @@ public class PatientServiceImpl implements PatientService {
          return patientModelDtoList;
      }
 
-     @Override
+    @Override
+    public PatientModel getPatientByPatientId(String name) {
+        return patientRepository.findByPatientId(name);
+    }
+
+    @Override
      public void savePatient(PatientModel patient) {
             patientRepository.save(patient);
      }

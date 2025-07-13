@@ -1,11 +1,11 @@
 <div th:fragment="content">
     <!-- Main content -->
-    <section class="content">
 
+    <section class="content">
         <div class="row">
             <div class="col-xl-8 col-12">
                 <div class="d-md-flex align-items-center justify-content-between mb-20">
-                    <a href="javascript:void(0);" class="btn btn-primary me-5 mb-md-0 mb-5"><i class="fa fa-edit"></i> Edit Profile</a>
+                    <a th:href="@{/patient/edit/{id}(id=${patient.id})}" class="btn btn-primary me-5 mb-md-0 mb-5"><i class="fa fa-edit"></i> Edit Profile</a>
                     <div class="d-flex">
                         <a href="javascript:void(0);" class="btn btn-outline btn-danger me-5"><i class="fa fa-times-circle-o"></i> Reject Patient</a>
                         <a href="javascript:void(0);" class="btn btn-success"><i class="fa fa-check-circle-o"></i> Accept Patient</a>
@@ -24,9 +24,9 @@
                                 </div>
                             </div>
                             <div class="mt-40">
-                                <h4 class="fw-600 mb-5">Mical Doe</h4>
-                                <h5 class="fw-500 mb-5">#p- 12458796</h5>
-                                <p><i class="fa fa-clock-o"></i> Admin on 15 May 2021, 10:00 AM</p>
+                                <h4 class="fw-600 mb-5" th:text="${patient.getUser.fullName}"></h4>
+                                <h5 class="fw-500 mb-5" th:text="${patient.patientId}"></h5>
+                                <p th:text="${patient.getUser.createdAt}"><i class="fa fa-clock-o"></i></p>
                             </div>
                         </div>
                     </div>
@@ -43,9 +43,9 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div>
-                                            <p>Email :<span class="text-gray ps-10">David@yahoo.com</span> </p>
-                                            <p>Phone :<span class="text-gray ps-10">+11 123 456 7890</span></p>
-                                            <p>Address :<span class="text-gray ps-10">123, Lorem Ipsum, Florida, USA</span></p>
+                                            <p>Email :<span class="text-gray ps-10" th:text="${patient.getUser.email}"></span> </p>
+                                            <p>Phone :<span class="text-gray ps-10" th:text="${patient.getUser.phone}"></span></p>
+                                            <p>Address :<span class="text-gray ps-10" th:text="${patient.getUser.address}"></span></p>
                                         </div>
                                     </div>
                                     <div class="col-12">

@@ -56,6 +56,12 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    public DoctorModel getDoctorByDoctorId(String id) {
+        DoctorModel doctor = doctorRepository.findByDoctorId(id);
+        return doctor;
+    }
+
+    @Override
     public String generateDoctorId() {
         long count = doctorRepository.count(); // e.g., 3 doctors
         return "dr-" + (count + 1); // -> "dr-4"

@@ -1,6 +1,8 @@
 package com.example.dms.controller;
 
 import com.example.dms.model.AppointmentModel;
+import com.example.dms.modelDto.AppointmentModelDto;
+import com.example.dms.modelDto.DoctorModelDto;
 import com.example.dms.service.AppointmentService;
 import com.example.dms.service.DoctorService;
 import com.example.dms.service.PatientService;
@@ -26,21 +28,50 @@ public class AppointmentController {
     public AppointmentController(@Qualifier("appointmentService") AppointmentService appointmentService) {
         this.appointmentService = appointmentService;
     }
+    @GetMapping("/appointment/show")
+    public String showAppointmentPage(Model model) {
+        model.addAttribute("title", "Appointments List");
+        model.addAttribute("content", "appointment/appointments-list :: content");
+        AppointmentModelDto appointmentModelDto = new AppointmentModelDto();
+        model.addAttribute("appointments", appointmentService.findAllAppointments());
+        return "layout";
+    }
 
-    @GetMapping("/appointments/add")
-    public String showAppointments(Model model) {
+    @GetMapping("/appointment/add")
+    public String showAppointments(
+            @RequestParam(value = "department", required = false) String department,
+            Model model) {
+
         model.addAttribute("title", "Book Appointment");
         model.addAttribute("content", "appointment/appointment-add :: content");
         model.addAttribute("appointment", new AppointmentModel());
+
         model.addAttribute("patientList", patientService.getAllPatient());
-        model.addAttribute("doctorList", doctorService.getAllDoctors());
+
+        List<DoctorModelDto> allDoctors = doctorService.getAllDoctors();
+
+        // Unique department list
+        List<String> departments = allDoctors.stream()
+                .map(DoctorModelDto::getDepartment)
+                .distinct()
+                .toList();
+        model.addAttribute("departments", departments);
+        model.addAttribute("selectedDepartment", department);
+
+        // Filter doctors by selected department
+        List<DoctorModelDto> filteredDoctors = (department != null && !department.isEmpty())
+                ? allDoctors.stream()
+                .filter(d -> d.getDepartment().equalsIgnoreCase(department))
+                .toList()
+                : List.of();
+        model.addAttribute("doctorList", filteredDoctors);
 
         return "layout";
     }
 
-    @PostMapping("/api/appointments/add")
-    public AppointmentModel addAppointment(@RequestBody AppointmentModel appointmentModel) {
+    @PostMapping("/appointment/add")
+    public String addAppointment(@ModelAttribute("appointment") AppointmentModel appointmentModel) {
         appointmentService.saveAppointment(appointmentModel);
-        return appointmentModel;
+        return "redirect:/appointment/add";
     }
 }

@@ -3,24 +3,35 @@
         <h4 class="box-title">Appointment Booking Form</h4>
     </div>
 
+    <form class="form" method="get" th:action="@{/appointment/add}">
+        <div class="box-body">
+            <label class="form-label required">Department</label>
+            <select class="form-control" name="department" onchange="this.form.submit()">
+                <option value="">Select Department</option>
+                <option th:each="d : ${departments}"
+                        th:value="${d}"
+                        th:text="${d}"
+                        th:selected="${d == selectedDepartment}">
+                </option>
+            </select>
+        </div>
+    </form>
     <form class="form" method="post" th:action="@{/appointment/add}" th:object="${appointment}">
         <div class="box-body">
             <h4 class="box-title text-info mb-0"><i class="ti-calendar me-15"></i> Appointment Info</h4>
             <hr class="my-15">
 
             <div class="row">
-                <!-- Doctor Selection -->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="form-label required">Doctor</label>
-                        <select class="form-control" th:field="*{doctorId}">
-                            <option value="">Select Patient</option>
-                            <option th:each="p : ${patientList}"
-                                    th:value="${p.patientId}"
-                                    th:text="${p.fullName}">
-                            </option>
-                        </select>
-                    </div>
+                <!-- Doctor Dropdown -->
+                <div class="form-group">
+                    <label class="form-label required">Doctor</label>
+                    <select class="form-control" th:field="*{doctorId}">
+                        <option value="">Select Doctor</option>
+                        <option th:each="d : ${doctorList}"
+                                th:value="${d.doctorId}"
+                                th:text="${d.fullName}">
+                        </option>
+                    </select>
                 </div>
 
                 <!-- Patient Selection -->

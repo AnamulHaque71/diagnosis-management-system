@@ -1,0 +1,66 @@
+<div class="box" th:fragment="content">
+  <div class="col-12">
+    <div class="box">
+      <div class="box-body">
+        <div class="table-responsive rounded card-table">
+            <p th:text="${appointments}"></p>
+          <tr class="hover-primary" th:each="appointment : ${appointments}">
+            <td th:text="${appointment.doctorName}"></td>
+          </tr>
+
+          <table class="table border-no" id="example1">
+            <thead>
+            <tr>
+              <th>Appointment ID</th>
+              <th>Patient ID</th>
+              <th>Patient Name</th>
+              <th>Doctor ID</th>
+              <th>Doctor Name</th>
+              <th>Appointment Date</th>
+              <th>Created At</th>
+              <th>Status</th>
+              <th>Action</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <tr class="hover-primary" th:each="appointment : ${appointments}">
+              <td th:text="${appointment.id}"></td>
+              <td th:text="${appointment.patientId}"></td>
+              <td th:text="${appointment.patientName}"></td>
+              <td th:text="${appointment.doctorId}"></td>
+              <td th:text="${appointment.doctorName}">Doctor Name</td>
+              <td th:text="${appointment.appointmentDate}"></td>
+                <td th:text="${appointment.createdAt}"></td>
+<!--              <td><span th:text="${appointment.status}" class="badge badge-danger-light"></span></td>-->
+              <td>
+                <span th:text="${appointment.status}"
+                      th:class="'badge ' +
+                (${appointment.status} == 'Pending' ? 'badge-warning-light' :
+                (${appointment.status} == 'Confirmed' ? 'badge-warning' :
+                (${appointment.status} == 'Completed' ? 'badge-success' :
+                (${appointment.status} == 'Canceled' ? 'badge-danger' : 'badge-secondary'))))">
+                </span>
+
+              </td>
+
+              <td>
+                <div class="btn-group">
+                  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" th:href="@{/appointment/view/{id}(id=${appointment.id})}">View Details</a>
+                    <a class="dropdown-item" th:href="@{/appointment/edit/{id}(id=${appointment.id})}">Edit</a>
+                    <a class="dropdown-item" th:href="@{/appointment/delete/{id}(id=${appointment.id})}">Delete</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

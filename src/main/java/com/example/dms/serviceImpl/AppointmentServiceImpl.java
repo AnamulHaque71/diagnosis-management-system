@@ -1,11 +1,15 @@
 package com.example.dms.serviceImpl;
 
 import com.example.dms.model.AppointmentModel;
+import com.example.dms.modelDto.AppointmentModelDto;
 import com.example.dms.repository.AppointmentRepository;
 import com.example.dms.service.AppointmentService;
+import com.example.dms.service.DoctorService;
+import com.example.dms.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +18,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Autowired
     private AppointmentRepository appointmentRepository;
+    @Autowired
+    private DoctorService doctorService;
+    @Autowired
+    private PatientService patientService;
 
     @Override
     public List<AppointmentModel> findByPatientId(String patientId) {
@@ -26,8 +34,28 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentModel> findAllAppointments() {
-        return appointmentRepository.findAll();
+    public List<AppointmentModelDto> findAllAppointments() {
+
+        List<AppointmentModelDto> appointmentModelDtoList = new ArrayList<>();
+
+        List<AppointmentModel> appointmentModel = appointmentRepository.findAll();
+
+        for(AppointmentModel appointment : appointmentModel) {
+            AppointmentModelDto appointmentDto = new AppointmentModelDto();
+            appointmentDto.setId(appointment.getId());
+            appointmentDto.setDoctorId(appointment.getDoctorId());
+            appointmentDto.setDoctorName((doctorService.getDoctorByDoctorId(appointment.getDoctorId())).getUser().getFullName());
+            appointmentDto.setStatus(appointment.getStatus());
+            appointmentDto.setCreatedAt(appointment.getCreatedAt());
+            appointmentDto.setAppointmentDate(appointment.getAppointmentDate());
+            appointmentDto.setPatientId(appointment.getPatientId());
+            appointmentDto.setPatientName((patientService.getPatientByPatientId(appointment.getPatientId())).getUser().getFullName());
+
+            appointmentModelDtoList.add(appointmentDto);
+        }
+
+
+        return appointmentModelDtoList;
     }
 
 

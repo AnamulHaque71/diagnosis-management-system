@@ -10,10 +10,7 @@ import com.example.dms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -79,4 +76,66 @@ public class PatientController {
         return "redirect:/patient/show";
 
     }
+    @GetMapping("/patient/view/{id}")
+    public String patientView(@PathVariable Long id, Model model) {
+
+
+        model.addAttribute("title", "View Patient");
+        model.addAttribute("content", "patient/patient-view :: content");
+        model.addAttribute("patient", patientService.getPatientById(id));
+        return "layout";
+    }
+    @GetMapping("/patient/edit/{id}")
+    public String editPatientPage(@PathVariable Long id, Model model) {
+        model.addAttribute("title", "Add Patient");
+        model.addAttribute("content", "patient/patient-edit :: content");
+        PatientModelDto patient = new PatientModelDto();
+        PatientModel p = patientService.getPatientById(id);
+
+        patient.setId(p.getId());
+        patient.setPatientId(p.getPatientId());
+        patient.setUsername(p.getUser().getUsername());
+        patient.setPassword(p.getUser().getPassword());
+        patient.setFullName(p.getUser().getFullName());
+        patient.setRole(p.getUser().getRole());
+        patient.setEmail(p.getUser().getEmail());
+        patient.setPhone(p.getUser().getPhone());
+        patient.setAddress(p.getUser().getAddress());
+        patient.setGender(p.getUser().getGender());
+        patient.setDob(p.getUser().getDob());
+        patient.setBloodGroup(p.getUser().getBloodGroup());
+        patient.setImage(p.getUser().getImage());
+        patient.setCreatedAt(p.getUser().getCreatedAt());
+        patient.setVerified(p.getUser().isVerified());
+
+        model.addAttribute("patient", patient);
+        return "layout";
+    }
+
+    @PostMapping("/patient/edit/{id}")
+    public String editPatient(@PathVariable Long id,@ModelAttribute("patient") PatientModelDto patientModelDto){
+        UserModel user = patientService.getPatientById(id).getUser();
+
+        user.setUsername(patientModelDto.getUsername());
+        user.setPassword(patientModelDto.getPassword());
+        user.setFullName(patientModelDto.getFullName());
+        user.setRole("Patient");
+        user.setEmail(patientModelDto.getEmail());
+        user.setPhone(patientModelDto.getPhone());
+        user.setAddress(patientModelDto.getAddress());
+        user.setGender(patientModelDto.getGender());
+        user.setDob(patientModelDto.getDob());
+        user.setBloodGroup(patientModelDto.getBloodGroup());
+        user.setImage(patientModelDto.getImage());
+        user.setCreatedAt(patientModelDto.getCreatedAt());
+        user.setVerified(patientModelDto.isVerified());
+
+        userService.saveUser(user);
+
+
+        return "redirect:/patient/show";
+
+    }
+
+
 }

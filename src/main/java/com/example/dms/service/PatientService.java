@@ -10,6 +10,7 @@ import java.util.List;
 public interface PatientService {
     List<PatientModelDto> getAllPatient();
 
+    PatientModel getPatientByPatientId(String name);
     void savePatient(PatientModel patient);
 
     PatientModel getPatientById(Long id);

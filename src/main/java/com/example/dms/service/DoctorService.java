@@ -9,6 +9,7 @@ import java.util.List;
 @Service
 public interface DoctorService {
     List<DoctorModelDto> getAllDoctors();
+    DoctorModel getDoctorByDoctorId(String id);
     String generateDoctorId();
     Long getNextDoctorId();
     void saveDoctor(DoctorModel doctor);
