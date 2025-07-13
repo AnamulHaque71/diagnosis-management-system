@@ -38,6 +38,7 @@ public class DoctorController {
         List<DoctorModelDto> doctor = doctorService.getAllDoctors();
         model.addAttribute("doctors", doctor);
         return "layout";
+
     }
 
     @GetMapping("/doctor/add")
