@@ -82,4 +82,21 @@ public class AppointmentServiceImpl implements AppointmentService {
         Long count = appointmentRepository.count(); // count existing doctors
         return count + 1;
     }
+    @Override
+    public AppointmentModelDto getAppointmentId(Long id) {
+        AppointmentModel appointmentModel =  appointmentRepository.findById(id).orElse(null);
+        AppointmentModelDto appointmentModelDto = new AppointmentModelDto();
+
+
+        appointmentModelDto.setId(appointmentModel.getId());
+        appointmentModelDto.setDoctorId(appointmentModel.getDoctorId());
+        appointmentModelDto.setDoctorName((doctorService.getDoctorByDoctorId(appointmentModel.getDoctorId())).getUser().getFullName());
+        appointmentModelDto.setStatus(appointmentModel.getStatus());
+        appointmentModelDto.setCreatedAt(appointmentModel.getCreatedAt());
+        appointmentModelDto.setAppointmentDate(appointmentModel.getAppointmentDate());
+        appointmentModelDto.setPatientId(appointmentModel.getPatientId());
+        appointmentModelDto.setPatientName((patientService.getPatientByPatientId(appointmentModel.getPatientId())).getUser().getFullName());
+
+        return appointmentModelDto;
+    }
 }

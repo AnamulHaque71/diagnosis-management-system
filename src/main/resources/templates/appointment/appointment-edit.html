@@ -1,0 +1,74 @@
+<div class="box" th:fragment="content">
+    <div class="box-header with-border">
+        <h4 class="box-title">Appointment Booking Form</h4>
+    </div>
+
+    <form class="form" method="post" th:action="@{/appointment/edit/{id}(id=${appointment.id})}" th:object="${appointment}">
+        <div class="box-body">
+            <h4 class="box-title text-info mb-0"><i class="ti-calendar me-15"></i> Appointment Info</h4>
+            <hr class="my-15">
+
+            <div class="row">
+                <!-- Doctor Dropdown -->
+                <div class="form-group">
+                    <label class="form-label required">Doctor</label>
+                    <select class="form-control" th:field="*{doctorId}">
+                        <option value="">Select Doctor</option>
+                        <option th:each="d : ${doctorList}"
+                                th:value="${d.doctorId}"
+                                th:text="${d.fullName}">
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Patient Selection -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label required">Patient</label>
+                        <select class="form-control" th:field="*{patientId}">
+                            <option value="">Select Patient</option>
+                            <option th:each="p : ${patientList}"
+                                    th:value="${p.patientId}"
+                                    th:text="${p.fullName}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <!-- Appointment Date -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label required">Appointment Date</label>
+                        <input type="date" th:field="*{appointmentDate}" class="form-control">
+                    </div>
+                </div>
+
+                <!-- Status -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label required">Status</label>
+                        <select th:field="*{status}" class="form-control">
+                            <option value="">Select Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Confirmed">Confirmed</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Canceled">Canceled</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-footer">
+            <button type="button" class="btn btn-warning me-1" onclick="window.history.back()">
+                <i class="ti-trash"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">
+                <i class="ti-save-alt"></i> Book Appointment
+            </button>
+        </div>
+    </form>
+</div>

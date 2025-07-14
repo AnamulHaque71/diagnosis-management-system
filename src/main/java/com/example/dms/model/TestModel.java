@@ -15,20 +15,16 @@ public class TestModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Foreign key to Doctor
-    @ManyToOne
     @JoinColumn(name = "doctor_id")
-    private DoctorModel doctor;
+    private String doctorId;
 
-    // Foreign key to TestType
-    @ManyToOne
+
     @JoinColumn(name = "test_type_id")
-    private TestTypeModel testType;
+    private String testTypeId;
 
-    // Foreign key to Patient
-    @ManyToOne
+
     @JoinColumn(name = "patient_id")
-    private PatientModel patient;
+    private String patientId;
 
     private String status;
 

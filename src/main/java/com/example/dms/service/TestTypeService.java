@@ -7,6 +7,7 @@ import java.util.List;
 
 @Service
 public interface TestTypeService {
+    TestTypeModel getTestTypeByTestId(String testTypeId);
     List<TestTypeModel> getAllTestType();
     void saveTestType(TestTypeModel testTypeModel);
     TestTypeModel getTestTypeById(Long id);

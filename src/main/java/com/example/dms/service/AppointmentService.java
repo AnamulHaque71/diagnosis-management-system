@@ -15,5 +15,5 @@ public interface AppointmentService {
     void saveAppointment(AppointmentModel appointmentModel);
     String generateAppointmentId();
     Long getNextAppointmentId();
-
+    AppointmentModelDto getAppointmentId(Long id);
 }

@@ -48,7 +48,6 @@ public class PatientController {
         user.setUsername(patientModelDto.getUsername());
         user.setPassword(patientModelDto.getPassword());
         user.setFullName(patientModelDto.getFullName());
-        user.setFullName(patientModelDto.getFullName());
         user.setRole("Patient");
         user.setEmail(patientModelDto.getEmail());
         user.setPhone(patientModelDto.getPhone());

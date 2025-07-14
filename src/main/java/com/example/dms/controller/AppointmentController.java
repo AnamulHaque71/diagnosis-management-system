@@ -74,4 +74,27 @@ public class AppointmentController {
         appointmentService.saveAppointment(appointmentModel);
         return "redirect:/appointment/add";
     }
+
+    @GetMapping("/appointment/edit/{id}")
+    public String editAppointment(
+            @RequestParam(value = "department", required = false) String department,
+            @PathVariable Long id, Model model){
+        model.addAttribute("title", "Edit Appointment");
+        model.addAttribute("content", "appointment/appointment-edit :: content");
+//        model.addAttribute("appointment", new AppointmentModel());
+
+        model.addAttribute("patientList", patientService.getAllPatient());
+        model.addAttribute("doctorList", doctorService.getAllDoctors());
+        AppointmentModelDto appointmentModelDto = appointmentService.getAppointmentId(id);
+        model.addAttribute("appointment", appointmentModelDto);
+
+        return "layout";
+    }
+    @PostMapping("/appointment/edit/{id}")
+    public String updateAppointment(@PathVariable Long id, @ModelAttribute("appointment") AppointmentModel appointmentModel) {
+        appointmentModel.setId(id);
+        appointmentService.saveAppointment(appointmentModel);
+        return "redirect:/appointment/show";
+    }
+
 }

@@ -14,7 +14,8 @@ public class TestTypeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String test_type_id;
+    @Column(name = "test_type_id")
+    private String testTypeId;
     @Column(name = "test_name")
     private String TestName;
     private String TestDescription;

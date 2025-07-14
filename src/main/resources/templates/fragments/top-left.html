@@ -254,6 +254,21 @@
                         </li>
                         <li class="treeview">
                             <a href="#">
+                                <i data-feather="activity"></i>
+                                <span>Test</span>
+                                <span class="pull-right-container">
+									<i class="fa fa-angle-right pull-right"></i>
+								</span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a th:href="@{/test/add}"><i class="icon-Commit"><span class="path1"></span><span
+                                        class="path2"></span></i>Test Add</a></li>
+                                <li><a th:href="@{/test/show}"><i class="icon-Commit"><span class="path1"></span><span
+                                        class="path2"></span></i>Test List</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
                                 <i data-feather="package"></i>
                                 <span>Features</span>
                                 <span class="pull-right-container">

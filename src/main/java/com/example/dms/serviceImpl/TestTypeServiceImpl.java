@@ -15,6 +15,11 @@ public class TestTypeServiceImpl implements TestTypeService {
     private TestTypeRepository testTypeRepository;
 
     @Override
+    public TestTypeModel getTestTypeByTestId(String testTypeId) {
+        return testTypeRepository.findByTestTypeId(testTypeId);
+    }
+
+    @Override
     public List<TestTypeModel> getAllTestType() {
         return testTypeRepository.findAll();
     }

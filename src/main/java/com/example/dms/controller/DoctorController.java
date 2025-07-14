@@ -30,7 +30,7 @@ public class DoctorController {
 
     @GetMapping("/doctor/show")
     public String showDoctor(Model model) {
-        model.addAttribute("title", "Show Docto");
+        model.addAttribute("title", "Show Doctor");
         model.addAttribute("content", "doctor/doctors-list :: content");
         List<DoctorModelDto> doctors = doctorService.getAllDoctors();
         model.addAttribute("doctors", doctors);
