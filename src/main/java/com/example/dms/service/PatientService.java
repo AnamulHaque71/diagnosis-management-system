@@ -21,4 +21,6 @@ public interface PatientService {
 
     Long getNextPatientId();
 
+    int totalPatient();
+
 }

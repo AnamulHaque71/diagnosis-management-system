@@ -76,4 +76,9 @@ public class PatientServiceImpl implements PatientService {
     public Long getNextPatientId() {
         return patientRepository.findMaxPatientIdNumber().orElse(201L) + 1;
     }
+
+    @Override
+    public int totalPatient() {
+        return patientRepository.findAll().size();
+    }
 }

@@ -1,0 +1,36 @@
+<div class="box" th:fragment="content">
+    <div class="box-body">
+        <div class="table-responsive rounded card-table">
+            <table class="table border-no" id="example1">
+                <thead>
+                <tr>
+                    <th>TestID</th>
+                    <th>TestName</th>
+                    <th>Description</th>
+                    <th>Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="hover-primary" th:each="testTypeModel : ${testTypeModelList}">
+                    <td th:text="${testTypeModel.testTypeId}"></td>
+                    <td th:text="${testTypeModel.testName}"></td>
+                    <td th:text="${testTypeModel.TestDescription}"></td>
+                    <!--                            <td><span class="badge badge-danger-light">New Patient</span></td>-->
+                    <td>
+                        <div class="btn-group">
+                            <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i
+                                    class="fa fa-ellipsis-h"></i></a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" ref="#">View Details</a>
+                                <a class="dropdown-item" ref="#">Edit</a>
+                                <a class="dropdown-item" ref="#">Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="box" th:fragment="content">
+    <div class="box-header with-border">
+        <h4 class="box-title">Add new Test Type Form</h4>
+    </div>
+
+
+    <form class="form" method="post" th:action="@{/test-type/add}" th:object="${testtype}">
+        <div class="box-body">
+            <h4 class="box-title text-info mb-0"><i class="ti-calendar me-15"></i> Test Type Info</h4>
+            <hr class="my-15">
+
+            <div class="row">
+                <!-- Doctor Dropdown -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label required">Test Type Name</label>
+                        <input type="text" th:field="*{TestName}" class="form-control" placeholder="Enter Test Type Name" name="Test Name">
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label required">Add Description</label>
+                        <textarea type="text" th:field="*{TestDescription}" class="form-control" placeholder="Add Description" name="Description"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-footer">
+            <button type="button" class="btn btn-warning me-1" onclick="window.history.back()">
+                <i class="ti-trash"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">
+                <i class="ti-save-alt"></i> Add Test
+            </button>
+        </div>
+    </form>
+</div>
