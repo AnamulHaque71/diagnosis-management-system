@@ -1,17 +1,23 @@
 package com.example.dms.controller;
 
+import com.example.dms.model.AppointmentModel;
+import com.example.dms.model.DoctorModel;
 import com.example.dms.model.PatientModel;
 import com.example.dms.model.UserModel;
+import com.example.dms.modelDto.AppointmentModelDto;
 import com.example.dms.modelDto.DoctorModelDto;
 import com.example.dms.modelDto.PatientModelDto;
 import com.example.dms.repository.PatientRepository;
 import com.example.dms.service.PatientService;
+import com.example.dms.service.DoctorService;
 import com.example.dms.service.UserService;
+import com.example.dms.serviceImpl.AppointmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +28,11 @@ public class PatientController {
     @Autowired
     private UserService userService;
     @Autowired
+    private DoctorService doctorService;
+    @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private AppointmentServiceImpl appointmentService;
 
     @GetMapping("/patient/show")
     public String showPatient(Model model) {
@@ -82,6 +92,24 @@ public class PatientController {
         model.addAttribute("title", "View Patient");
         model.addAttribute("content", "patient/patient-view :: content");
         model.addAttribute("patient", patientService.getPatientById(id));
+        List<DoctorModel> doctorList = new ArrayList<>();
+        List<AppointmentModel> appointments = appointmentService.findByPatientId(patientService.getPatientById(id).getPatientId());
+        for (AppointmentModel appointment : appointments) {
+            DoctorModel doctorModel = doctorService.getDoctorByDoctorId(appointment.getDoctorId());
+            doctorList.add(doctorModel);
+        }
+
+//        List<DoctorModel> doctors = new ArrayList<>();
+//
+//        List<AppointmentModelDto> appointmentModels = appointmentService.findAllAppointments();
+//        for(AppointmentModelDto appointmentModel : appointmentModels){
+//            if(appointmentModel.getPatientId().equals(patientService.getPatientById(id).getPatientId()))
+//            {
+//                doctors.add(doctorService.getDoctorByDoctorId(appointmentModel.getDoctorId()));
+//            }
+//        }
+        model.addAttribute("appointments", appointments);
+        model.addAttribute("doctors", doctorList);
         return "layout";
     }
     @GetMapping("/patient/edit/{id}")
@@ -134,6 +162,12 @@ public class PatientController {
 
         return "redirect:/patient/show";
 
+    }
+    @GetMapping("/patient/delete/{id}")
+    public String deletePatient(@PathVariable Long id)
+    {
+        userService.deleteUser(patientService.getPatientById(id).getUser().getId());
+        return "redirect:/patient/show";
     }
 
 

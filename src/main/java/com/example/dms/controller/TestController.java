@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -74,5 +75,33 @@ public class TestController {
         model.addAttribute("testModelDtoList", testModelDtoList);
 
         return "layout";
+    }
+
+    @GetMapping("/test/edit/{id}")
+    public String editTest(@PathVariable Long id, Model model)
+    {
+        model.addAttribute("title", "Edit Test");
+        model.addAttribute("content", "test/test-edit :: content");
+        TestModel testModel = testService.getTestById(id);
+        model.addAttribute("test", testModel);
+        model.addAttribute("testTypeList", testTypeService.getAllTestType());
+        model.addAttribute("doctorList", doctorService.getAllDoctors());
+        model.addAttribute("patientList", patientService.getAllPatient());
+
+        return "layout";
+    }
+
+    @PostMapping("/test/edit/{id}")
+    public String updateTest(@PathVariable Long id, TestModel testModel) {
+        testModel.setId(id);
+        testModel.setCreatedAt(testService.getTestById(id).getCreatedAt());
+        testService.saveTest(testModel);
+        return "redirect:/test/show";
+    }
+    @GetMapping("/test/delete/{id}")
+    public String deleteTest(@PathVariable Long id)
+    {
+        testService.deleteTest(id);
+        return "redirect:/test/show";
     }
 }

@@ -13,5 +13,5 @@ public interface DoctorService {
     String generateDoctorId();
     Long getNextDoctorId();
     void saveDoctor(DoctorModel doctor);
-
+    DoctorModel getDoctorById(Long id);
 }

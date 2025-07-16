@@ -56,8 +56,8 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public DoctorModel getDoctorByDoctorId(String id) {
-        DoctorModel doctor = doctorRepository.findByDoctorId(id);
+    public DoctorModel getDoctorByDoctorId(String doctorId) {
+        DoctorModel doctor = doctorRepository.findByDoctorId(doctorId);
         return doctor;
     }
 
@@ -77,6 +77,12 @@ public class DoctorServiceImpl implements DoctorService {
     public void saveDoctor(DoctorModel doctor) {
         doctorRepository.save(doctor);
     }
+
+    @Override
+    public DoctorModel getDoctorById(Long id) {
+        return doctorRepository.findById(id).orElse(null);
+    }
+
 
 
 }

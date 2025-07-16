@@ -103,5 +103,11 @@ public class DoctorController {
         return result;
     }
 
+    @GetMapping("/doctor/delete/{id}")
+    public String deleteDoctor(@PathVariable Long id){
+        userService.deleteUser(doctorService.getDoctorById(id).getUser().getId());
+        return "redirect:/doctor/show";
+    }
+
 
 }
