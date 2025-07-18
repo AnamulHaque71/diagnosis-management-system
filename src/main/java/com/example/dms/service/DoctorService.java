@@ -14,4 +14,5 @@ public interface DoctorService {
     Long getNextDoctorId();
     void saveDoctor(DoctorModel doctor);
     DoctorModel getDoctorById(Long id);
+    int totalDoctor();
 }

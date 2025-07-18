@@ -83,6 +83,9 @@ public class DoctorServiceImpl implements DoctorService {
         return doctorRepository.findById(id).orElse(null);
     }
 
-
+    @Override
+    public int totalDoctor() {
+        return (int) doctorRepository.count();
+    }
 
 }

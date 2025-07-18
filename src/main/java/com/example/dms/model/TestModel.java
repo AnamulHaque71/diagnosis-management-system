@@ -28,5 +28,5 @@ public class TestModel {
 
     private String status;
 
-    private String createdAt; // Consider using LocalDateTime for better handling
+    private String createdAt;
 }

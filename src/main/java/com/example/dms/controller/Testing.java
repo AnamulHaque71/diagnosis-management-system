@@ -18,27 +18,5 @@ import java.util.List;
 
 @Controller
 public class Testing {
-//    @GetMapping("/appointments/add")
-//    public String showAppointments(Model model) {
-//        model.addAttribute("title", "Appointments");
-//        model.addAttribute("content", "appointments :: content");  // **This must be valid**
-//        return "layout";
-//    }
-    @GetMapping("/appointments")
-    public String appointmentPage(Model model) {
-        model.addAttribute("title", "Appointments");
-        model.addAttribute("content", "appointments :: content");
-
-        return "layout";
-    }
-
-    @GetMapping("/patient/view")
-    public String showAppointments(Model model) {
-        model.addAttribute("title", "Appointments");
-        model.addAttribute("content", "patient/patient-view :: content");  // **This must be valid**
-        return "layout";
-    }
-
-
 
 }

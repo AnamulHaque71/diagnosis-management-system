@@ -79,6 +79,6 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public int totalPatient() {
-        return patientRepository.findAll().size();
+        return (int) patientRepository.count();
     }
 }
