@@ -1,11 +1,9 @@
 package com.example.dms.model;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Entity
 @Data
@@ -21,7 +19,11 @@ public class UserModel {
     private String fullName;
     private String username;
     private String password;
-    private String role;
+
+    @OneToOne
+//    @Column(name = "role_id")
+    private RoleModel role;
+
     private String email;
     private String phone;
     private String address;

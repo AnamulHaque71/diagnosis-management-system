@@ -25,7 +25,7 @@ public class LabAssistantServiceImpl implements LabAssistantService {
 
             labAssistantModelDto.setUsername(labAssist.getUser().getUsername());
             labAssistantModelDto.setPassword(labAssist.getUser().getPassword());
-            labAssistantModelDto.setRole(labAssist.getUser().getRole());
+//            labAssistantModelDto.setRole(labAssist.getUser().getRole());
             labAssistantModelDto.setFullName(labAssist.getUser().getFullName());
             labAssistantModelDto.setEmail(labAssist.getUser().getEmail());
             labAssistantModelDto.setPhone(labAssist.getUser().getPhone());

@@ -54,7 +54,7 @@ public class DoctorController {
         user.setUsername(doctorDto.getUsername());
         user.setPassword(doctorDto.getPassword());
         user.setFullName(doctorDto.getFullName());
-        user.setRole("Doctor");
+//        user.setRole("Doctor");
         user.setEmail(doctorDto.getEmail());
         user.setPhone(doctorDto.getPhone());
         user.setAddress(doctorDto.getAddress());

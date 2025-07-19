@@ -10,6 +10,7 @@ import com.example.dms.modelDto.PatientModelDto;
 import com.example.dms.repository.PatientRepository;
 import com.example.dms.service.PatientService;
 import com.example.dms.service.DoctorService;
+import com.example.dms.service.RoleModelService;
 import com.example.dms.service.UserService;
 import com.example.dms.serviceImpl.AppointmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class PatientController {
     private PatientRepository patientRepository;
     @Autowired
     private AppointmentServiceImpl appointmentService;
+    @Autowired
+    private RoleModelService roleModelService;
 
     @GetMapping("/patient/show")
     public String showPatient(Model model) {
@@ -58,7 +61,7 @@ public class PatientController {
         user.setUsername(patientModelDto.getUsername());
         user.setPassword(patientModelDto.getPassword());
         user.setFullName(patientModelDto.getFullName());
-        user.setRole("Patient");
+        user.setRole(roleModelService.findRoleById(1L));
         user.setEmail(patientModelDto.getEmail());
         user.setPhone(patientModelDto.getPhone());
         user.setAddress(patientModelDto.getAddress());
@@ -124,7 +127,6 @@ public class PatientController {
         patient.setUsername(p.getUser().getUsername());
         patient.setPassword(p.getUser().getPassword());
         patient.setFullName(p.getUser().getFullName());
-        patient.setRole(p.getUser().getRole());
         patient.setEmail(p.getUser().getEmail());
         patient.setPhone(p.getUser().getPhone());
         patient.setAddress(p.getUser().getAddress());
@@ -144,9 +146,10 @@ public class PatientController {
         UserModel user = patientService.getPatientById(id).getUser();
 
         user.setUsername(patientModelDto.getUsername());
-        user.setPassword(patientModelDto.getPassword());
+        if(patientModelDto.getPassword() != null && !patientModelDto.getPassword().isEmpty()) {
+            user.setPassword(patientModelDto.getPassword());
+        }
         user.setFullName(patientModelDto.getFullName());
-        user.setRole("Patient");
         user.setEmail(patientModelDto.getEmail());
         user.setPhone(patientModelDto.getPhone());
         user.setAddress(patientModelDto.getAddress());
