@@ -13,11 +13,20 @@ import com.example.dms.service.DoctorService;
 import com.example.dms.service.RoleModelService;
 import com.example.dms.service.UserService;
 import com.example.dms.serviceImpl.AppointmentServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -54,8 +63,75 @@ public class PatientController {
         return "layout";
     }
 
+//    @PostMapping("/patient/add")
+//    public String addPatient(@ModelAttribute("patient") PatientModelDto patientModelDto){
+//        UserModel user = new UserModel();
+//
+//        user.setUsername(patientModelDto.getUsername());
+//        user.setPassword(patientModelDto.getPassword());
+//        user.setFullName(patientModelDto.getFullName());
+//        user.setRole(roleModelService.findRoleById(1L));
+//        user.setEmail(patientModelDto.getEmail());
+//        user.setPhone(patientModelDto.getPhone());
+//        user.setAddress(patientModelDto.getAddress());
+//        user.setGender(patientModelDto.getGender());
+//        user.setDob(patientModelDto.getDob());
+//        user.setBloodGroup(patientModelDto.getBloodGroup());
+//        user.setImage(patientModelDto.getImage());
+//        user.setCreatedAt(patientModelDto.getCreatedAt());
+//        user.setVerified(patientModelDto.isVerified());
+//
+//        Date currentDate = new Date();
+//        user.setCreatedAt(currentDate.toString());
+//
+//
+//        UserModel savedUser = userService.saveUser(user);
+//
+//        PatientModel patient = new PatientModel();
+//        patient.setUser(savedUser);
+//
+//        patient.setPatientId(patientService.generatePatientId());
+//
+//        patientRepository.save(patient);
+//
+//        return "redirect:/patient/show";
+//
+//    }
     @PostMapping("/patient/add")
-    public String addPatient(@ModelAttribute("patient") PatientModelDto patientModelDto){
+    public String addPatient(
+            @Valid @ModelAttribute("patient") PatientModelDto patientModelDto,
+            BindingResult result,
+            Model model
+    ) {
+
+        if (patientModelDto.getImage() == null || patientModelDto.getImage().isEmpty()){
+            result.addError(new FieldError("patientModelDto", "imageFile", "The image file is required"));
+        }
+//        if(result.hasErrors()){
+//
+//            return "patient-add";
+//        }
+
+        MultipartFile image = patientModelDto.getImage();
+        Date createdAt = new Date();
+        String stroageFileName = createdAt.getTime() + "_" + image.getOriginalFilename();
+
+        try{
+            String uploadDir = "public/images/patients/";
+            Path uploadPath = Paths.get(uploadDir, stroageFileName);
+
+            if (!Files.exists(uploadPath)){
+                Files.createDirectories(uploadPath);
+            }
+
+            try (InputStream inputStream = image.getInputStream()) {
+                Files.copy(inputStream, Paths.get(uploadDir + stroageFileName), StandardCopyOption.REPLACE_EXISTING);
+
+            }
+        } catch (Exception e){
+            System.out.println("Exception: " + e.getMessage());
+        }
+
         UserModel user = new UserModel();
 
         user.setUsername(patientModelDto.getUsername());
@@ -68,25 +144,19 @@ public class PatientController {
         user.setGender(patientModelDto.getGender());
         user.setDob(patientModelDto.getDob());
         user.setBloodGroup(patientModelDto.getBloodGroup());
-        user.setImage(patientModelDto.getImage());
-        user.setCreatedAt(patientModelDto.getCreatedAt());
+        user.setImage(stroageFileName);
+        user.setCreatedAt(new Date().toString());
         user.setVerified(patientModelDto.isVerified());
-
-        Date currentDate = new Date();
-        user.setCreatedAt(currentDate.toString());
-
 
         UserModel savedUser = userService.saveUser(user);
 
         PatientModel patient = new PatientModel();
         patient.setUser(savedUser);
-
         patient.setPatientId(patientService.generatePatientId());
 
         patientRepository.save(patient);
 
         return "redirect:/patient/show";
-
     }
     @GetMapping("/patient/view/{id}")
     public String patientView(@PathVariable Long id, Model model) {
@@ -133,7 +203,7 @@ public class PatientController {
         patient.setGender(p.getUser().getGender());
         patient.setDob(p.getUser().getDob());
         patient.setBloodGroup(p.getUser().getBloodGroup());
-        patient.setImage(p.getUser().getImage());
+        patient.setImageName(p.getUser().getImage());
         patient.setCreatedAt(p.getUser().getCreatedAt());
         patient.setVerified(p.getUser().isVerified());
 
@@ -156,7 +226,27 @@ public class PatientController {
         user.setGender(patientModelDto.getGender());
         user.setDob(patientModelDto.getDob());
         user.setBloodGroup(patientModelDto.getBloodGroup());
-        user.setImage(patientModelDto.getImage());
+        if (patientModelDto.getImage() != null && !patientModelDto.getImage().isEmpty()) {
+            MultipartFile image = patientModelDto.getImage();
+            Date createdAt = new Date();
+            String storageFileName = createdAt.getTime() + "_" + image.getOriginalFilename();
+
+            try {
+                String uploadDir = "public/images/patients/";
+                Path uploadPath = Paths.get(uploadDir, storageFileName);
+
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+
+                try (InputStream inputStream = image.getInputStream()) {
+                    Files.copy(inputStream, Paths.get(uploadDir + storageFileName), StandardCopyOption.REPLACE_EXISTING);
+                }
+            } catch (Exception e) {
+                System.out.println("Exception: " + e.getMessage());
+            }
+            user.setImage(storageFileName);
+        }
         user.setCreatedAt(patientModelDto.getCreatedAt());
         user.setVerified(patientModelDto.isVerified());
 

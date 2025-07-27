@@ -2,14 +2,17 @@ package com.example.dms.modelDto;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientModelDto {
     private long id;
+    @NotEmpty(message = "username cannot be empty")
     private String username;
     private String password;
     private String fullName;
@@ -21,7 +24,8 @@ public class PatientModelDto {
     private String dob;
     @Column(name = "blood_group")
     private String bloodGroup;
-    private String image;
+    private MultipartFile image;
+    private String imageName;
     @Column(name = "created_at")
     private String createdAt;
     private boolean verified;

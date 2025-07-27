@@ -35,7 +35,7 @@ public class PatientServiceImpl implements PatientService {
              patientModelDto.setGender(patient.getUser().getGender());
              patientModelDto.setDob(patient.getUser().getDob());
              patientModelDto.setBloodGroup(patient.getUser().getBloodGroup());
-             patientModelDto.setImage(patient.getUser().getImage());
+             patientModelDto.setImageName(patient.getUser().getImage());
 
              Date currentDate = new Date();
              patientModelDto.setCreatedAt(currentDate.toString());

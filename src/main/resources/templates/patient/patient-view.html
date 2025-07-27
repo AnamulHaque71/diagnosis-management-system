@@ -21,7 +21,8 @@
                     <div class="box-body wed-up position-relative">
                         <div class="d-md-flex align-items-center">
                             <div class=" me-20 text-center text-md-start">
-                                <img th:src="@{/images/avatar/2.jpg}" class="bg-success-light rounded10" alt="" />
+<!--                                <img th:src="@{/images/avatar/2.jpg}" class="bg-success-light rounded10" alt="" />-->
+                                <img th:src="@{'/images/patients/' + ${patient.getUser.image}}"  class="bg-success-light rounded10" alt="" style="width: 150px; height: 150px; object-fit: cover;" />
                                 <div class="text-center my-10">
                                     <p class="mb-0">Disease</p>
                                     <h4>Cold & Flu</h4>

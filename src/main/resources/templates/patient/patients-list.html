@@ -27,7 +27,7 @@
                             <td th:text="${patient.gender}"></td>
                             <td th:text="${patient.dob}"></td>
                             <td th:text="${patient.bloodGroup}"></td>
-                            <td th:text="${patient.image}"></td>
+                            <td><img th:src="@{'/images/patients/' + ${patient.imageName}}" class="bg-success-light rounded10" alt="" style="width: 70px; height: 70px; object-fit: cover;" ></td>
 <!--                            <td><span class="badge badge-danger-light">New Patient</span></td>-->
                             <td>
                                 <div class="btn-group">
