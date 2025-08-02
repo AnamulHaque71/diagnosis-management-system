@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @NoArgsConstructor
@@ -21,7 +22,8 @@ public class DoctorModelDto {
     private String dob;
     @Column(name = "blood_group")
     private String bloodGroup;
-    private String image;
+    private MultipartFile image;
+    private String imageName;
     @Column(name = "created_at")
     private String createdAt;
     private boolean verified;

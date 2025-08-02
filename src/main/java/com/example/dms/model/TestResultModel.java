@@ -31,6 +31,7 @@ public class TestResultModel {
     private LabAssistantModel labAssistant;
 
     private String result;
+    private String report;
     private String status;
 
     private String createdAt;

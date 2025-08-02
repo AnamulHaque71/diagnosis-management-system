@@ -7,12 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TestModelDto {
-    private Long id;
-    private String testName;
-    private String doctorName;
+public class AllTestShowDTO {
+    private String testTypeId;
+    private String TestName;
+    private String patientId;
     private String patientName;
-    private String status;
-    private String resultName;
+    private String createdAt;
+    private String result;
     private String reportFileName;
+    private String status;
 }

@@ -35,7 +35,7 @@ public class DoctorServiceImpl implements DoctorService {
             doctorDto.setGender(doctor.getUser().getGender());
             doctorDto.setDob(doctor.getUser().getDob());
             doctorDto.setBloodGroup(doctor.getUser().getBloodGroup());
-            doctorDto.setImage(doctor.getUser().getImage());
+            doctorDto.setImageName(doctor.getUser().getImage());
 
             Date currentDate = new Date();
             doctorDto.setCreatedAt(currentDate.toString());

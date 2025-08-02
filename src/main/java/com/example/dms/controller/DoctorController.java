@@ -5,12 +5,21 @@ import com.example.dms.model.UserModel;
 import com.example.dms.modelDto.DoctorModelDto;
 import com.example.dms.service.DoctorService;
 import com.example.dms.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -48,22 +57,54 @@ public class DoctorController {
         return "layout";
     }
     @PostMapping("/doctor/add")
-    public String addDoctor(DoctorModelDto doctorDto) {
+    public String addDoctor(
+            @Valid @ModelAttribute("doctor") DoctorModelDto doctorModelDto,
+            BindingResult result,
+            Model model
+    )
+    {
+        if (doctorModelDto.getImage() == null || doctorModelDto.getImage().isEmpty()){
+            result.addError(new FieldError("doctorModelDto", "imageFile", "The image file is required"));
+        }
+//        if(result.hasErrors()){
+//
+//            return "patient-add";
+//        }
+
+        MultipartFile image = doctorModelDto.getImage();
+        Date createdAt = new Date();
+        String stroageFileName = createdAt.getTime() + "_" + image.getOriginalFilename();
+
+        try{
+            String uploadDir = "public/images/doctors/";
+            Path uploadPath = Paths.get(uploadDir, stroageFileName);
+
+            if (!Files.exists(uploadPath)){
+                Files.createDirectories(uploadPath);
+            }
+
+            try (InputStream inputStream = image.getInputStream()) {
+                Files.copy(inputStream, Paths.get(uploadDir + stroageFileName), StandardCopyOption.REPLACE_EXISTING);
+
+            }
+        } catch (Exception e){
+            System.out.println("Exception: " + e.getMessage());
+        }
 
         UserModel user = new UserModel();
-        user.setUsername(doctorDto.getUsername());
-        user.setPassword(doctorDto.getPassword());
-        user.setFullName(doctorDto.getFullName());
+        user.setUsername(doctorModelDto.getUsername());
+        user.setPassword(doctorModelDto.getPassword());
+        user.setFullName(doctorModelDto.getFullName());
 //        user.setRole("Doctor");
-        user.setEmail(doctorDto.getEmail());
-        user.setPhone(doctorDto.getPhone());
-        user.setAddress(doctorDto.getAddress());
-        user.setGender(doctorDto.getGender());
-        user.setDob(doctorDto.getDob());
-        user.setBloodGroup(doctorDto.getBloodGroup());
-        user.setImage(doctorDto.getImage());
-        user.setCreatedAt(doctorDto.getCreatedAt());
-        user.setVerified(doctorDto.isVerified());
+        user.setEmail(doctorModelDto.getEmail());
+        user.setPhone(doctorModelDto.getPhone());
+        user.setAddress(doctorModelDto.getAddress());
+        user.setGender(doctorModelDto.getGender());
+        user.setDob(doctorModelDto.getDob());
+        user.setBloodGroup(doctorModelDto.getBloodGroup());
+        user.setImage(stroageFileName);
+        user.setCreatedAt(doctorModelDto.getCreatedAt());
+        user.setVerified(doctorModelDto.isVerified());
 
         Date currentDate = new Date();
         user.setCreatedAt(currentDate.toString());
@@ -75,11 +116,11 @@ public class DoctorController {
 
         doctor.setUser(savedUser);
 
-        doctor.setSpecialization(doctorDto.getSpecialization());
-        doctor.setDepartment(doctorDto.getDepartment());
-        doctor.setDesignation(doctorDto.getDesignation());
-        doctor.setExperienceYears(doctorDto.getExperienceYears());
-        doctor.setDegree(doctorDto.getDegree());
+        doctor.setSpecialization(doctorModelDto.getSpecialization());
+        doctor.setDepartment(doctorModelDto.getDepartment());
+        doctor.setDesignation(doctorModelDto.getDesignation());
+        doctor.setExperienceYears(doctorModelDto.getExperienceYears());
+        doctor.setDegree(doctorModelDto.getDegree());
 
         doctor.setDoctorId(doctorService.generateDoctorId());
         doctorService.saveDoctor(doctor);
