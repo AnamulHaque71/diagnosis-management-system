@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 @Entity
 @NoArgsConstructor
@@ -27,6 +30,8 @@ public class TestModel {
     private String patientId;
 
     private String status;
+
+    private String resultName;
 
     private String createdAt;
 }
