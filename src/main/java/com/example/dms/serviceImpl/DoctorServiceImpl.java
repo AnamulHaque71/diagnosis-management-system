@@ -7,9 +7,7 @@ import com.example.dms.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service("doctorService")
 public class DoctorServiceImpl implements DoctorService {
@@ -63,10 +61,8 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public String generateDoctorId() {
-        long count = doctorRepository.count(); // e.g., 3 doctors
-        return "dr-" + (count + 1); // -> "dr-4"
+        return "dr-" + UUID.randomUUID().toString().substring(0, 8);
     }
-
     @Override
     public Long getNextDoctorId() {
         Long count = doctorRepository.count(); // count existing doctors

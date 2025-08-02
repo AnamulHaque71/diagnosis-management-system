@@ -5,7 +5,7 @@
         <h4 class="box-title">Doctor Information Form</h4>
     </div>
     <!-- /.box-header -->
-    <form class="form" method="post" th:action="@{/doctor/add}" th:object="${doctor}" enctype="multipart/form-data">
+    <form class="form" method="post" th:action="@{/doctor/add}" th:object="${doctor}">
         <div class="box-body">
             <h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i> Basic Information</h4>
             <hr class="my-15">
@@ -88,12 +88,12 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Profile Image</label>
-                        <input type="file" class="form-control">
-                    </div>
-                </div>
+<!--                <div class="col-md-6">-->
+<!--                    <div class="form-group">-->
+<!--                        <label class="form-label">Profile Image</label>-->
+<!--                        <input type="file" class="form-control" name="image" th:field="*{image}">-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
 
             <div class="form-group">

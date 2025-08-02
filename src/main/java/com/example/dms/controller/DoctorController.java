@@ -10,16 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -63,33 +67,33 @@ public class DoctorController {
             Model model
     )
     {
-        if (doctorModelDto.getImage() == null || doctorModelDto.getImage().isEmpty()){
-            result.addError(new FieldError("doctorModelDto", "imageFile", "The image file is required"));
-        }
+//        if (doctorModelDto.getImage() == null || doctorModelDto.getImage().isEmpty()){
+//            result.addError(new FieldError("doctorModelDto", "imageFile", "The image file is required"));
+//        }
 //        if(result.hasErrors()){
 //
 //            return "patient-add";
 //        }
 
-        MultipartFile image = doctorModelDto.getImage();
-        Date createdAt = new Date();
-        String stroageFileName = createdAt.getTime() + "_" + image.getOriginalFilename();
-
-        try{
-            String uploadDir = "public/images/doctors/";
-            Path uploadPath = Paths.get(uploadDir, stroageFileName);
-
-            if (!Files.exists(uploadPath)){
-                Files.createDirectories(uploadPath);
-            }
-
-            try (InputStream inputStream = image.getInputStream()) {
-                Files.copy(inputStream, Paths.get(uploadDir + stroageFileName), StandardCopyOption.REPLACE_EXISTING);
-
-            }
-        } catch (Exception e){
-            System.out.println("Exception: " + e.getMessage());
-        }
+//        MultipartFile image = doctorModelDto.getImage();
+//        Date createdAt = new Date();
+//        String stroageFileName = createdAt.getTime() + "_" + image.getOriginalFilename();
+//
+//        try{
+//            String uploadDir = "public/images/doctors/";
+//            Path uploadPath = Paths.get(uploadDir, stroageFileName);
+//
+//            if (!Files.exists(uploadPath)){
+//                Files.createDirectories(uploadPath);
+//            }
+//
+//            try (InputStream inputStream = image.getInputStream()) {
+//                Files.copy(inputStream, Paths.get(uploadDir + stroageFileName), StandardCopyOption.REPLACE_EXISTING);
+//
+//            }
+//        } catch (Exception e){
+//            System.out.println("Exception: " + e.getMessage());
+//        }
 
         UserModel user = new UserModel();
         user.setUsername(doctorModelDto.getUsername());
@@ -102,7 +106,7 @@ public class DoctorController {
         user.setGender(doctorModelDto.getGender());
         user.setDob(doctorModelDto.getDob());
         user.setBloodGroup(doctorModelDto.getBloodGroup());
-        user.setImage(stroageFileName);
+//        user.setImage(stroageFileName);
         user.setCreatedAt(doctorModelDto.getCreatedAt());
         user.setVerified(doctorModelDto.isVerified());
 
@@ -127,6 +131,8 @@ public class DoctorController {
 
         return "redirect:/doctor/show";
     }
+
+
     @GetMapping("/doctors/by-department")
     @ResponseBody
     public List<Map<String, String>> getDoctorsByDepartment(@RequestParam String department) {
