@@ -117,9 +117,37 @@
                     <!-- Department -->
                     <div class="form-group">
                         <label class="form-label">Department</label>
-                        <input type="text" class="form-control" th:field="*{department}" placeholder="Enter department">
+                        <select class="form-control" th:field="*{department}">
+                            <option value="">Select a department</option>
+                            <option value="Emergency Department (ED)">Emergency Department (ED)</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Pediatrics">Pediatrics</option>
+                            <option value="Obstetrics and Gynecology">Obstetrics and Gynecology</option>
+                            <option value="Oncology">Oncology</option>
+                            <option value="Orthopedics">Orthopedics</option>
+                            <option value="Radiology">Radiology</option>
+                            <option value="Pathology">Pathology</option>
+                            <option value="General Surgery">General Surgery</option>
+                            <option value="Urology">Urology</option>
+                            <option value="Dermatology">Dermatology</option>
+                            <option value="Gastroenterology">Gastroenterology</option>
+                            <option value="Nephrology">Nephrology</option>
+                            <option value="Pulmonology">Pulmonology</option>
+                            <option value="Psychiatry">Psychiatry</option>
+                            <option value="Endocrinology">Endocrinology</option>
+                            <option value="Rheumatology">Rheumatology</option>
+                            <option value="Anesthesiology">Anesthesiology</option>
+                            <option value="Intensive Care Unit (ICU)">Intensive Care Unit (ICU)</option>
+                            <option value="Infectious Diseases">Infectious Diseases</option>
+                            <option value="Ophthalmology">Ophthalmology</option>
+                            <option value="ENT (Otorhinolaryngology)">ENT (Otorhinolaryngology)</option>
+                            <option value="Hematology">Hematology</option>
+                            <option value="Physical Medicine and Rehab">Physical Medicine and Rehab</option>
+                        </select>
                         <small class="text-danger" th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></small>
                     </div>
+
                 </div>
             </div>
 

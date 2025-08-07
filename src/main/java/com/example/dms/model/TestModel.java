@@ -20,14 +20,17 @@ public class TestModel {
 
     @JoinColumn(name = "doctor_id")
     private String doctorId;
+    private String doctorName;
 
 
     @JoinColumn(name = "test_type_id")
     private String testTypeId;
+    private String testTypeName;
 
 
     @JoinColumn(name = "patient_id")
     private String patientId;
+    private String patientName;
 
     private String status;
 

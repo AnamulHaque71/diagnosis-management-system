@@ -32,7 +32,6 @@ public class AppointmentController {
     public String showAppointmentPage(Model model) {
         model.addAttribute("title", "Appointments List");
         model.addAttribute("content", "appointment/appointments-list :: content");
-        AppointmentModelDto appointmentModelDto = new AppointmentModelDto();
         model.addAttribute("appointments", appointmentService.findAllAppointments());
         return "layout";
     }
@@ -71,8 +70,10 @@ public class AppointmentController {
 
     @PostMapping("/appointment/add")
     public String addAppointment(@ModelAttribute("appointment") AppointmentModel appointmentModel) {
+        appointmentModel.setPatientName(patientService.getPatientByPatientId(appointmentModel.getPatientId()).getUser().getFullName());
+        appointmentModel.setDoctorName(doctorService.getDoctorByDoctorId(appointmentModel.getDoctorId()).getUser().getFullName());
         appointmentService.saveAppointment(appointmentModel);
-        return "redirect:/appointment/add";
+        return "redirect:/appointment/show";
     }
 
     @GetMapping("/appointment/edit/{id}")
@@ -93,6 +94,8 @@ public class AppointmentController {
     @PostMapping("/appointment/edit/{id}")
     public String updateAppointment(@PathVariable Long id, @ModelAttribute("appointment") AppointmentModel appointmentModel) {
         appointmentModel.setId(id);
+        appointmentModel.setPatientName(patientService.getPatientByPatientId(appointmentModel.getPatientId()).getUser().getFullName());
+        appointmentModel.setDoctorName(doctorService.getDoctorByDoctorId(appointmentModel.getDoctorId()).getUser().getFullName());
         appointmentService.saveAppointment(appointmentModel);
         return "redirect:/appointment/show";
     }

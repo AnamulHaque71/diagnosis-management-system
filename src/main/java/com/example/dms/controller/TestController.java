@@ -1,8 +1,6 @@
 package com.example.dms.controller;
 
 import com.example.dms.model.TestModel;
-import com.example.dms.model.TestTypeModel;
-import com.example.dms.modelDto.AllTestShowDTO;
 import com.example.dms.modelDto.TestModelDto;
 import com.example.dms.service.DoctorService;
 import com.example.dms.service.PatientService;
@@ -46,13 +44,14 @@ public class TestController {
 
 
 
-    @GetMapping("/uploadPage/{id}")
+    @GetMapping("/reportUpload/{id}")
     public String showUploadPage(@PathVariable Long id, Model model) {
         model.addAttribute("testId", id);
-        return "test/upload-result";
+        model.addAttribute("content", "test/upload-report :: content");
+        return "layout";
     }
 
-    @PostMapping("/uploadResult/{id}")
+    @PostMapping("/reportUpload/{id}")
     public String uploadResultFile(@PathVariable Long id,
                                    @RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
@@ -118,6 +117,10 @@ public class TestController {
 
         Date currentDate = new Date();
         testModel.setCreatedAt(currentDate.toString());
+
+        testModel.setTestTypeName(testTypeService.getTestTypeByTestId(testModel.getTestTypeId()).getTestName());
+        testModel.setDoctorName(doctorService.getDoctorByDoctorId(testModel.getDoctorId()).getUser().getFullName());
+        testModel.setPatientName(patientService.getPatientByPatientId(testModel.getPatientId()).getUser().getFullName());
 
         testService.saveTest(testModel);
 

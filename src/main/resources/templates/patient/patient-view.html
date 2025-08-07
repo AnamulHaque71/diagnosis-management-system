@@ -123,26 +123,23 @@
                     <div class="box-header">
                         <h4 class="box-title">Assigned Doctor</h4>
                     </div>
-                    <div class="box-body">
+                    <div class="box-body" th:each="doctor : ${doctors}">
                         <div class="d-flex align-items-center">
                             <img th:src="@{/images/avatar/avatar-10.png}" class="w-100 bg-primary-light rounded10 me-15" alt="" />
                             <div>
-                                <h4 class="mb-0">Dr. Johen Doe</h4>
-                                <p class="text-muted">Physician</p>
-                                <div class="d-flex">
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star-half"></i>
-                                </div>
+                                <p class="text-muted mb-1"><strong>Specialization:</strong> <span th:text="${doctor.specialization}">Cardiology</span></p>
+                                <p class="text-muted mb-1"><strong>Department:</strong> <span th:text="${doctor.department}">Internal Medicine</span></p>
+                                <p class="text-muted mb-1"><strong>Designation:</strong> <span th:text="${doctor.designation}">Senior Consultant</span></p>
+                                <p class="text-muted mb-1"><strong>Experience:</strong> <span th:text="${doctor.experienceYears}">10</span> years</p>
+                                <p class="text-muted mb-1"><strong>Degree:</strong> <span th:text="${doctor.degree}">MBBS</span></p>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mt-15">
                             <a href="javascript:void(0);" class="btn btn-danger-light me-4">Unassign</a>
-                            <a href="javascript:void(0);" class="btn btn-success-light ">Check</a>
+                            <a href="javascript:void(0);" class="btn btn-success-light">Check</a>
                         </div>
                     </div>
+
                 </div>
                 <div class="box">
                     <div class="box-header">

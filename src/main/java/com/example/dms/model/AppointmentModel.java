@@ -18,6 +18,7 @@ public class AppointmentModel {
 
     @Column(name = "doctor_id")
     private String doctorId;
+    private String doctorName;
 
     private String status;
     private String createdAt;
@@ -27,5 +28,6 @@ public class AppointmentModel {
 
     @Column(name = "patient_id")
     private String patientId;
+    private String patientName;
 
 }

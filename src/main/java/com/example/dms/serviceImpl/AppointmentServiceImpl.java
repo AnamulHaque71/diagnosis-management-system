@@ -44,12 +44,12 @@ public class AppointmentServiceImpl implements AppointmentService {
             AppointmentModelDto appointmentDto = new AppointmentModelDto();
             appointmentDto.setId(appointment.getId());
             appointmentDto.setDoctorId(appointment.getDoctorId());
-            appointmentDto.setDoctorName((doctorService.getDoctorByDoctorId(appointment.getDoctorId())).getUser().getFullName());
+            appointmentDto.setDoctorName(appointment.getDoctorName());
             appointmentDto.setStatus(appointment.getStatus());
             appointmentDto.setCreatedAt(appointment.getCreatedAt());
             appointmentDto.setAppointmentDate(appointment.getAppointmentDate());
             appointmentDto.setPatientId(appointment.getPatientId());
-            appointmentDto.setPatientName((patientService.getPatientByPatientId(appointment.getPatientId())).getUser().getFullName());
+            appointmentDto.setPatientName(appointment.getPatientName());
 
             appointmentModelDtoList.add(appointmentDto);
         }
@@ -90,12 +90,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         appointmentModelDto.setId(appointmentModel.getId());
         appointmentModelDto.setDoctorId(appointmentModel.getDoctorId());
-        appointmentModelDto.setDoctorName((doctorService.getDoctorByDoctorId(appointmentModel.getDoctorId())).getUser().getFullName());
+        appointmentModelDto.setDoctorName(appointmentModel.getDoctorName());
         appointmentModelDto.setStatus(appointmentModel.getStatus());
         appointmentModelDto.setCreatedAt(appointmentModel.getCreatedAt());
         appointmentModelDto.setAppointmentDate(appointmentModel.getAppointmentDate());
         appointmentModelDto.setPatientId(appointmentModel.getPatientId());
-        appointmentModelDto.setPatientName((patientService.getPatientByPatientId(appointmentModel.getPatientId())).getUser().getFullName());
+        appointmentModelDto.setPatientName(appointmentModel.getPatientName());
 
         return appointmentModelDto;
     }
