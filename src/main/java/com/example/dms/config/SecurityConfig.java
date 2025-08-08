@@ -29,6 +29,8 @@ public class SecurityConfig {
     private AccessDeniedHandler accessDeniedHandler;
     @Autowired
     private RoleModelRepository roleModelRepository;
+    @Autowired
+    private CustomLoginSuccessHandler customLoginSuccessHandler;
 
 
     @Bean
@@ -47,7 +49,8 @@ public class SecurityConfig {
                         .loginProcessingUrl("/login")
                         .usernameParameter("email")   // if your form uses 'email' field
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/dashboard", true)
+//                        .defaultSuccessUrl("/dashboard", true)
+                        .successHandler(customLoginSuccessHandler)  // Use custom handler here
                         .failureUrl("/login?error=true")      // Redirect on failure
                         .permitAll()
                 )

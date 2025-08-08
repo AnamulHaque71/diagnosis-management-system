@@ -33,4 +33,8 @@ public class TestServiceImpl implements TestService {
     public void deleteTest(Long id) {
         testRepository.deleteById(id);
     }
+
+    public int totalTest() {
+        return (int) testRepository.count();
+    }
 }

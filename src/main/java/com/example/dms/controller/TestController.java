@@ -121,7 +121,7 @@ public class TestController {
         testModel.setTestTypeName(testTypeService.getTestTypeByTestId(testModel.getTestTypeId()).getTestName());
         testModel.setDoctorName(doctorService.getDoctorByDoctorId(testModel.getDoctorId()).getUser().getFullName());
         testModel.setPatientName(patientService.getPatientByPatientId(testModel.getPatientId()).getUser().getFullName());
-
+        testModel.setStatus("Pending");
         testService.saveTest(testModel);
 
         return "redirect:/test/show";

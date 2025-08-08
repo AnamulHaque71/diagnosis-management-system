@@ -1,10 +1,10 @@
-<div class="wrapper" th:fragment="topLeft">
+<div class="wrapper" th:fragment="topLeft" xmlns:sec="http://www.w3.org/1999/xhtml">
     <!--    <div id="loader"></div>-->
 
     <header class="main-header">
         <div class="d-flex align-items-center logo-box justify-content-start">
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a th:href="@{/}" class="logo">
                 <!-- logo-->
                 <div class="logo-mini w-50">
                     <span class="light-logo"><img th:src="@{/images/logo-letter.png}" alt="logo"></span>
@@ -141,8 +141,9 @@
                            data-bs-toggle="dropdown" title="User">
                             <div class="d-flex pt-5">
                                 <div class="text-end me-10">
-                                    <p class="pt-5 fs-14 mb-0 fw-700 text-primary">Johen Doe</p>
-                                    <small class="fs-10 mb-0 text-uppercase text-mute">Admin</small>
+                                    <p class="pt-5 fs-14 mb-0 fw-700 text-primary" sec:authentication="name">User Name</p>
+
+                                    <small class="fs-10 mb-0 text-uppercase text-mute" ><span sec:authentication="principal.authorities"></span></small>
                                 </div>
                                 <img th:src="@{/images/avatar/avatar-1.png}"
                                      class="avatar rounded-10 bg-primary-light h-40 w-40" alt="" />
@@ -156,7 +157,7 @@
                                 <a class="dropdown-item" href="#"><i class="ti-settings text-muted me-2"></i>
                                     Settings</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="ti-lock text-muted me-2"></i> Logout</a>
+                                <a class="dropdown-item" th:href="@{/logout}"><i class="ti-lock text-muted me-2"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -180,9 +181,9 @@
             <div class="multinav">
                 <div class="multinav-scroll" style="height: 100%;">
                     <!-- sidebar menu-->
-                    <ul class="sidebar-menu" data-widget="tree">
+                    <ul class="sidebar-menu" data-widget="tree" >
                         <li>
-                            <a th:href="@{/dashboard}">
+                            <a th:href="@{/dashboard}" sec:authorize="hasRole('ROLE_ADMIN')">
                                 <i data-feather="monitor"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -203,7 +204,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview" sec:authorize="hasRole('ROLE_ADMIN')">
                             <a href="#">
                                 <i data-feather="users"></i>
                                 <span>Patients</span>
@@ -228,11 +229,13 @@
 									<i class="fa fa-angle-right pull-right"></i>
 								</span>
                             </a>
+
                             <ul class="treeview-menu">
+                                <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/doctor/add}"><i class="icon-Commit"><span class="path1"></span><span
+                                        class="path2"></span></i>Doctor Add</a></li>
                                 <li><a th:href="@{/doctor/show}"><i class="icon-Commit"><span class="path1"></span><span
                                         class="path2"></span></i>Doctor's List</a></li>
-                                <li><a th:href="@{/doctor/add}"><i class="icon-Commit"><span class="path1"></span><span
-                                        class="path2"></span></i>Doctor Add</a></li>
+
                             </ul>
                         </li>
                         <li class="treeview">
@@ -244,7 +247,7 @@
 								</span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a th:href="@{/test-type/add}"><i class="icon-Commit"><span class="path1"></span><span
+                                <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/test-type/add}"><i class="icon-Commit"><span class="path1"></span><span
                                         class="path2"></span></i>Test Type Add</a></li>
                                 <li><a th:href="@{/test-type/show}"><i class="icon-Commit"><span class="path1"></span><span
                                         class="path2"></span></i>Test Type List</a></li>
@@ -804,8 +807,7 @@
 <!--                            </ul>-->
 <!--                        </li>-->
 <!--                    </ul>-->
-
-                    <div class="sidebar-widgets">
+                    <div class="sidebar-widgets" style="margin-top: 120px">
                         <div class="mx-25 mb-30 pb-20 side-bx bg-primary-light rounded20">
                             <div class="text-center">
                                 <img th:src="@{/images/svg-icon/color-svg/custom-17.svg}" class="sideimg p-5" alt="">
@@ -816,7 +818,7 @@
                             </div>
                         </div>
                         <div class="copyright text-center m-25">
-                            <p><strong class="d-block">Diaog Dashboard</strong> ©
+                            <p><strong class="d-block">DMS Dashboard</strong> ©
                                 <script>document.write(new Date().getFullYear())</script> All Rights Reserved
                             </p>
                         </div>

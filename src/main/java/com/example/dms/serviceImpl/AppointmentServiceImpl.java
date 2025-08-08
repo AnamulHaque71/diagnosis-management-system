@@ -99,4 +99,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         return appointmentModelDto;
     }
+    public int totalAppointment() {
+        return (int) appointmentRepository.count();
+    }
 }

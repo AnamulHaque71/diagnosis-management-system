@@ -1,4 +1,4 @@
-<div class="box" th:fragment="content">
+<div class="box" th:fragment="content" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="box-body">
         <div class="table-responsive rounded card-table">
             <table class="table border-no" id="example1">
@@ -7,7 +7,7 @@
                     <th>TestID</th>
                     <th>TestName</th>
                     <th>Description</th>
-                    <th>Action</th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')">Action</th>
 
                 </tr>
                 </thead>
@@ -17,7 +17,7 @@
                     <td th:text="${testTypeModel.testName}"></td>
                     <td th:text="${testTypeModel.TestDescription}"></td>
                     <!--                            <td><span class="badge badge-danger-light">New Patient</span></td>-->
-                    <td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')">
                         <div class="btn-group">
                             <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i
                                     class="fa fa-ellipsis-h"></i></a>

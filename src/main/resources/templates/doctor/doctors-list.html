@@ -13,7 +13,6 @@
                             <th>Gender</th>
                             <th sec:authorize="hasRole('ROLE_ADMIN')">DOB</th>
                             <th>Blood Group</th>
-                            <th>Image</th>
                             <th>Specialization</th>
                             <th>Department</th>
                             <th>Designation</th>
@@ -32,7 +31,6 @@
                             <td th:text="${doctor.gender}"></td>
                             <td th:text="${doctor.dob}" sec:authorize="hasRole('ROLE_ADMIN')"></td>
                             <td th:text="${doctor.bloodGroup}"></td>
-                            <td th:text="${doctor.image}"></td>
                             <td th:text="${doctor.specialization}"></td>
                             <td th:text="${doctor.department}"></td>
                             <td th:text="${doctor.designation}"></td>

@@ -14,5 +14,6 @@ public interface TestService {
     TestModel getTestById(Long id);
 
     void deleteTest(Long id);
+    int totalTest();
 
 }

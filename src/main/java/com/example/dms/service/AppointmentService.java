@@ -16,4 +16,5 @@ public interface AppointmentService {
     String generateAppointmentId();
     Long getNextAppointmentId();
     AppointmentModelDto getAppointmentId(Long id);
+    int totalAppointment();
 }
