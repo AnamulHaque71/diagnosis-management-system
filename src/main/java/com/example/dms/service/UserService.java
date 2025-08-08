@@ -10,11 +10,11 @@ public interface UserService {
     List<UserModel> getAllUsers();
 
     UserModel saveUser(UserModel user);
-
+    UserModel findByEmail(String email);
     UserModel getUserById(Long id);
 
     void deleteUser(Long id);
-
-//    UserModel registerUser(UserModel user);
-
+    boolean registerUser(UserModel user);
+    boolean emailExists(String email);
+    UserModel loginUser(String email, String password);
 }

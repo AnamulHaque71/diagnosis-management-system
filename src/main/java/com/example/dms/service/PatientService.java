@@ -11,6 +11,7 @@ public interface PatientService {
     List<PatientModelDto> getAllPatient();
 
     PatientModel getPatientByPatientId(String name);
+    PatientModel findByUserId(Long id);
     void savePatient(PatientModel patient);
 
     PatientModel getPatientById(Long id);

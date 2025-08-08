@@ -43,8 +43,6 @@ public class PatientController {
     private PatientRepository patientRepository;
     @Autowired
     private AppointmentServiceImpl appointmentService;
-    @Autowired
-    private RoleModelService roleModelService;
 
     @GetMapping("/patient/show")
     public String showPatient(Model model) {
@@ -137,7 +135,6 @@ public class PatientController {
         user.setUsername(patientModelDto.getUsername());
         user.setPassword(patientModelDto.getPassword());
         user.setFullName(patientModelDto.getFullName());
-        user.setRole(roleModelService.findRoleById(1L));
         user.setEmail(patientModelDto.getEmail());
         user.setPhone(patientModelDto.getPhone());
         user.setAddress(patientModelDto.getAddress());

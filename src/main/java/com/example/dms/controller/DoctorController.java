@@ -8,6 +8,7 @@ import com.example.dms.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -51,6 +52,7 @@ public class DoctorController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/doctor/add")
     public String getDoctorPage(Model model) {
         model.addAttribute("title", "Add Doctor - DMS");

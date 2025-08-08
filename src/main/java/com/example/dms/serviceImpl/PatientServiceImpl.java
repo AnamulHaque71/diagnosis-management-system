@@ -52,6 +52,11 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public PatientModel findByUserId(Long id) {
+        return patientRepository.findByUser_Id(id);
+    }
+
+    @Override
      public void savePatient(PatientModel patient) {
             patientRepository.save(patient);
      }

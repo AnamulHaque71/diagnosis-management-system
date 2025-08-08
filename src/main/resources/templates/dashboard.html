@@ -1,8 +1,13 @@
-<div class="wrapper" th:fragment="content" xmlns:th="http://www.w3.org/1999/xhtml">
+<div class="wrapper" th:fragment="content" xmlns:th="http://www.w3.org/1999/xhtml"
+     xmlns:sec="http://www.w3.org/1999/xhtml">
 
     <!-- Content Wrapper. Contains page content -->
     <!-- Main content -->
     <section class="content">
+        <p>
+            Your role:
+            <span sec:authentication="principal.authorities"></span>
+        </p>
         <div class="row">
             <div class="col-xl-8 col-12">
                 <div class="row">

@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -20,9 +23,6 @@ public class UserModel {
     private String username;
     private String password;
 
-    @OneToOne
-//    @Column(name = "role_id")
-    private RoleModel role;
 
     private String email;
     private String phone;
@@ -38,5 +38,11 @@ public class UserModel {
     private PatientModel patient;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private DoctorModel doctor;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<RoleModel> roles = new HashSet<>();
 
 }

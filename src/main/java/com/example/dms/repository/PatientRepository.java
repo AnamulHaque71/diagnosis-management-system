@@ -12,4 +12,5 @@ public interface PatientRepository extends JpaRepository<PatientModel,Long> {
     @Query("SELECT MAX(CAST(SUBSTRING(p.patientId, 9) AS long)) FROM PatientModel p")
     Optional<Long> findMaxPatientIdNumber();
     PatientModel findByPatientId(String patientId);
+    PatientModel findByUser_Id(Long userId);
 }

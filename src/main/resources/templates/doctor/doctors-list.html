@@ -1,4 +1,4 @@
-<div class="box" th:fragment="content">
+<div class="box" th:fragment="content" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="col-12">
         <div class="box">
             <div class="box-body">
@@ -8,17 +8,18 @@
                         <tr>
                             <th>Doctor ID</th>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Address</th>
+                            <th sec:authorize="hasRole('ROLE_ADMIN')">Email</th>
+                            <th sec:authorize="hasRole('ROLE_ADMIN')">Address</th>
                             <th>Gender</th>
-                            <th>DOB</th>
+                            <th sec:authorize="hasRole('ROLE_ADMIN')">DOB</th>
                             <th>Blood Group</th>
                             <th>Image</th>
                             <th>Specialization</th>
                             <th>Department</th>
+                            <th>Designation</th>
                             <th>Experience(Y)</th>
                             <th>Degree</th>
-                            <th>Action</th>
+                            <th sec:authorize="hasRole('ROLE_ADMIN')">Action</th>
 
                         </tr>
                         </thead>
@@ -26,9 +27,10 @@
                         <tr class="hover-primary" th:each="doctor : ${doctors}">
                             <td th:text="${doctor.doctorId}"></td>
                             <td th:text="${doctor.fullName}"></td>
-                            <td th:text="${doctor.email}"></td>
+                            <td th:text="${doctor.email}" sec:authorize="hasRole('ROLE_ADMIN')"></td>
+                            <td th:text="${doctor.address}" sec:authorize="hasRole('ROLE_ADMIN')"></td>
                             <td th:text="${doctor.gender}"></td>
-                            <td th:text="${doctor.dob}"></td>
+                            <td th:text="${doctor.dob}" sec:authorize="hasRole('ROLE_ADMIN')"></td>
                             <td th:text="${doctor.bloodGroup}"></td>
                             <td th:text="${doctor.image}"></td>
                             <td th:text="${doctor.specialization}"></td>
@@ -38,7 +40,7 @@
                             <td th:text="${doctor.degree}"></td>
 
 <!--                            <td><span class="badge badge-danger-light">New Patient</span></td>-->
-                            <td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')">
                                 <div class="btn-group">
                                     <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
                                     <div class="dropdown-menu">
